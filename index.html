@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hair Haven — Luxury Hair Salon in London</title>
+  <meta name="description" content="Hair Haven — expert cuts, colour, barbering and nails in London (E14). Book your appointment online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.sumupbookings.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=42">
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <div class="nav__inner">
+      <a href="#top" class="brand">Hair&nbsp;Haven</a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="#offers">Offers</a>
+        <a href="#services">Services</a>
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav__right">
+        <button class="btn btn--book" data-hh-book>Book&nbsp;Now</button>
+        <button class="nav__toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <!-- 图片占位：把 hero 背景换成真实店内照即可（见 images/README.md） -->
+    <div class="hero__media" data-img="hero"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">London · E14<br>Canary Wharf</p>
+      <h1 class="hero__title">Where Luxury<br>Meets Your Hair</h1>
+      <p class="hero__sub">Expert cuts, colour, barbering &amp; nails.<br>Book your appointment online.</p>
+      <button class="btn btn--gold btn--lg" data-hh-book>Book an Appointment</button>
+      <p class="hero__note">Mon–Sun · 11.00–20.00</p>
+    </div>
+  </section>
+
+  <!-- ============ OFFERS ============ -->
+  <section class="offers" id="offers">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">Special Offers</p>
+      <h2 class="section__title section__title--light">Claim a Coupon</h2>
+      <p class="section__lead">Tap a coupon, pop in your email, and we'll send your unique code. Show it at reception to redeem in salon.</p>
+
+      <div class="ticket-grid">
+        <!-- 每张券点击后弹出详情 + 邮箱表单；占位内容，替换成真实活动 -->
+        <button class="ticket" data-coupon
+                data-tag="New Clients" data-value="15%" data-unit="OFF"
+                data-title="Your First Colour"
+                data-terms="New clients only · Any full-head colour · One per person · Cannot be combined with other offers."
+                data-expiry="Valid until 31 Dec 2026">
+          <span class="ticket__stub"><span class="ticket__value">15%</span><span class="ticket__unit">OFF</span></span>
+          <span class="ticket__body">
+            <span class="ticket__tag">New Clients</span>
+            <span class="ticket__title">Your First Colour</span>
+            <span class="ticket__cta">Get coupon →</span>
+          </span>
+        </button>
+
+        <button class="ticket" data-coupon
+                data-tag="Midweek" data-value="£10" data-unit="OFF"
+                data-title="Cut &amp; Blow-dry"
+                data-terms="Monday–Thursday only · Cut &amp; blow-dry appointments · One per person."
+                data-expiry="Valid until 31 Dec 2026">
+          <span class="ticket__stub"><span class="ticket__value">£10</span><span class="ticket__unit">OFF</span></span>
+          <span class="ticket__body">
+            <span class="ticket__tag">Midweek</span>
+            <span class="ticket__title">Cut &amp; Blow-dry</span>
+            <span class="ticket__cta">Get coupon →</span>
+          </span>
+        </button>
+
+        <button class="ticket" data-coupon
+                data-tag="Gift" data-value="FREE" data-unit="TREATMENT"
+                data-title="Treatment with any Colour"
+                data-terms="One complimentary conditioning treatment with any colour service · One per person."
+                data-expiry="Valid until 31 Dec 2026">
+          <span class="ticket__stub"><span class="ticket__value">FREE</span><span class="ticket__unit">TREAT</span></span>
+          <span class="ticket__body">
+            <span class="ticket__tag">Gift</span>
+            <span class="ticket__title">Treatment with any Colour</span>
+            <span class="ticket__cta">Get coupon →</span>
+          </span>
+        </button>
+      </div>
+      <p class="offers__note">占位优惠 · 邮箱表单需接入你的 Tally / Formspree（生成唯一码 + 发邮件 + 记台账）。</p>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <p class="eyebrow">Our Menu</p>
+      <h2 class="section__title">Services &amp; Prices</h2>
+      <p class="section__lead">Choose a service, then pick a time. For major colour changes, please book or request a consultation first. Colour prices vary by hair length.</p>
+      <p class="lead-sizes"><strong>S</strong> short · <strong>M</strong> medium · <strong>L</strong> long · <strong>ExL</strong> extra long.</p>
+
+      <!-- 分类选项卡：点一个只显示一类；左右可横向滑动，箭头引导 -->
+      <div class="chips-wrap">
+        <span class="chips-arrow chips-arrow--left" aria-hidden="true">‹</span>
+        <div class="chips" id="chips" role="tablist">
+          <button class="chip" data-cat="cat-haircuts">Haircuts</button>
+          <button class="chip" data-cat="cat-colour">Colour</button>
+          <button class="chip" data-cat="cat-packages">Colour Packages</button>
+          <button class="chip" data-cat="cat-mens">Men's</button>
+          <button class="chip" data-cat="cat-treatments">Treatments</button>
+          <button class="chip" data-cat="cat-nails">Nails</button>
+        </div>
+        <span class="chips-arrow chips-arrow--right" aria-hidden="true">›</span>
+      </div>
+
+      <!-- Haircuts -->
+      <div class="cat" id="cat-haircuts">
+        <h3 class="cat__title">Haircuts</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Ladies — Fringe</span></div><span class="item__price">£10</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men's — Dry Cut</span></div><span class="item__price">£28</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Kids — Boy Haircut <span class="item__meta">(under 12)</span></span></div><span class="item__price">£20</span></li>
+        </ul>
+      </div>
+
+      <!-- Colour -->
+      <div class="cat" id="cat-colour">
+        <h3 class="cat__title">Colour</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Colour</span><span class="item__sizes">S £65 · M £80 · L £95 · ExL £110</span></div><span class="item__price">from £65</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Highlights</span><span class="item__sizes">S £100 · M £125 · L £150</span></div><span class="item__price">from £100</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Bleach</span><span class="item__sizes">S £90 · M £105 · L £120</span></div><span class="item__price">from £90</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Balayage</span><span class="item__sizes">M £170 · L £210</span></div><span class="item__price">from £170</span></li>
+        </ul>
+      </div>
+
+      <!-- Colour Packages -->
+      <div class="cat" id="cat-packages">
+        <h3 class="cat__title">Colour Packages</h3>
+        <p class="cat__note">W/B = Wash &amp; Blow-dry · W/C/B = Wash, Cut &amp; Blow-dry</p>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Colour + W/B</span><span class="item__sizes">S £95 · M £115 · L £135</span></div><span class="item__price">from £95</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Colour + W/C/B</span><span class="item__sizes">S £105 · M £125 · L £145</span></div><span class="item__price">from £105</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Add-on — Full Tint Colour</span><span class="item__sizes">S £40 · M £50 · L £60</span></div><span class="item__price">from £40</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Add-on — Root Colour</span></div><span class="item__price">£30</span></li>
+        </ul>
+      </div>
+
+      <!-- Men's -->
+      <div class="cat" id="cat-mens">
+        <h3 class="cat__title">Men's</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">F/Tint + Wash &amp; Cut</span></div><span class="item__price">£70</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">F/Tint Only</span></div><span class="item__price">from £40</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Dry Cut</span></div><span class="item__price">£28</span></li>
+        </ul>
+      </div>
+
+      <!-- Treatments -->
+      <div class="cat" id="cat-treatments">
+        <h3 class="cat__title">Treatments</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Scalp &amp; Hair Treatment Set</span></div><span class="item__price">£50</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Scalp Treatment</span></div><span class="item__price">£30</span></li>
+        </ul>
+      </div>
+
+      <!-- Nails -->
+      <div class="cat" id="cat-nails">
+        <h3 class="cat__title">Nails</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Full Set — Acrylic &amp; Gel Polish</span><span class="item__sizes">from · 60 min</span></div><span class="item__price">£50</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Set — Biab &amp; Gel Polish</span><span class="item__sizes">60 min</span></div><span class="item__price">£55</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Set — Ombre</span><span class="item__sizes">from · 60 min</span></div><span class="item__price">£50</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Acrylic Infill — Acrylic &amp; Gel Polish</span><span class="item__sizes">50 min</span></div><span class="item__price">£45</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Manicure — Gel Polish with Biab</span><span class="item__sizes">35 min</span></div><span class="item__price">£45</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Express Gel Polish with Biab</span><span class="item__sizes">30 min</span></div><span class="item__price">£40</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Manicure with Gel Polish</span><span class="item__sizes">30 min</span></div><span class="item__price">£30</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Express Gel Polish <span class="item__meta">(file &amp; polish)</span></span><span class="item__sizes">20 min</span></div><span class="item__price">£25</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Cat Eye / Chrome</span></div><span class="item__price">£10</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Add-on — French Tip &amp; Nail Art</span><span class="item__sizes">from</span></div><span class="item__price">£10</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Add-on — Soak Off for Acrylic</span><span class="item__sizes">10 min</span></div><span class="item__price">£15</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Add-on — Soak Off Gel</span><span class="item__sizes">10 min</span></div><span class="item__price">£12</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Add-on — Nail Repair</span><span class="item__sizes">from</span></div><span class="item__price">£5</span></li>
+        </ul>
+      </div>
+
+      <div class="section__cta">
+        <button class="btn btn--gold btn--lg btn--noglow" data-hh-book>Book Your Appointment</button>
+      </div>
+
+      <p class="fineprint fineprint--center">Prices are indicative and confirmed at the time of booking. A consultation may be recommended for colour services.</p>
+    </div>
+  </section>
+
+  <!-- ============ SHOP (placeholder) ============ -->
+  <section class="section" id="shop">
+    <div class="wrap">
+      <p class="eyebrow">Shop</p>
+      <h2 class="section__title">Premium Hair Care</h2>
+      <p class="section__lead">Take the salon home with you. Our retail range and gift cards are coming online soon.</p>
+      <div class="shop-grid">
+        <div class="shop-card"><div class="shop-card__img" data-img="product"></div><div class="shop-card__body"><span class="shop-card__name">Product Name</span><span class="shop-card__price">£00</span></div></div>
+        <div class="shop-card"><div class="shop-card__img" data-img="product"></div><div class="shop-card__body"><span class="shop-card__name">Product Name</span><span class="shop-card__price">£00</span></div></div>
+        <div class="shop-card"><div class="shop-card__img" data-img="product"></div><div class="shop-card__body"><span class="shop-card__name">Gift Card</span><span class="shop-card__price">from £00</span></div></div>
+      </div>
+      <p class="fineprint">Shop coming soon · 占位板块，日后接 SumUp 付款链接 / 在线商店。</p>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about" id="about">
+    <div class="wrap about__inner">
+      <div class="about__media" data-img="about"></div>
+      <div class="about__text">
+        <p class="eyebrow">About</p>
+        <h2 class="section__title">A London Salon, Tailored to You</h2>
+        <p>Hair Haven is a London salon for expert haircuts, colour, barbering and nail services. We combine skilled technique, personal consultation and a relaxed, luxury experience so every appointment feels tailored to you.</p>
+        <p>From a fresh fringe to a full balayage transformation, our team takes the time to get it right.</p>
+        <button class="btn btn--dark" data-hh-book>Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section contact" id="contact">
+    <div class="wrap contact__inner">
+      <div class="contact__col">
+        <p class="eyebrow">Visit Us</p>
+        <h2 class="section__title">Find Hair Haven</h2>
+        <address class="contact__address">
+          2 Laybourne House, Admirals Way<br>
+          London, E14 5DA<br>
+          United Kingdom
+        </address>
+        <a class="contact__maplink" href="https://www.google.com/maps/search/?api=1&query=Hair+Haven+2+Laybourne+House+Admirals+Way+London+E14+5DA" target="_blank" rel="noopener noreferrer">Open in Google Maps →</a>
+      </div>
+      <div class="contact__col">
+        <h3 class="hours__title">Opening Hours</h3>
+        <ul class="hours">
+          <li><span>Monday</span><span>11:00 – 20:00</span></li>
+          <li><span>Tuesday</span><span>11:00 – 20:00</span></li>
+          <li><span>Wednesday</span><span>11:00 – 20:00</span></li>
+          <li><span>Thursday</span><span>11:00 – 20:00</span></li>
+          <li><span>Friday</span><span>11:00 – 20:00</span></li>
+          <li><span>Saturday</span><span>11:00 – 20:00</span></li>
+          <li><span>Sunday</span><span>11:00 – 20:00</span></li>
+        </ul>
+        <button class="btn btn--gold" data-hh-book>Book an Appointment</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span class="footer__brand">Hair Haven</span>
+      <span class="footer__meta">London · E14 5DA · Open daily 11:00–20:00</span>
+      <span class="footer__copy">© 2026 Hair Haven</span>
+    </div>
+  </footer>
+
+  <!-- ============ 预订浮层（自建：iframe 预加载，点击秒开、无转圈） ============ -->
+  <div class="booking-modal" id="bookingModal" aria-hidden="true">
+    <div class="booking-modal__backdrop" data-hh-close></div>
+    <div class="booking-modal__panel">
+      <button class="booking-modal__close" data-hh-close aria-label="Close">✕</button>
+      <div class="booking-modal__frame" id="bookingFrame"></div>
+    </div>
+  </div>
+
+  <!-- ============ 优惠券弹层 ============ -->
+  <div class="coupon-modal" id="couponModal" aria-hidden="true">
+    <div class="coupon-modal__backdrop" data-coupon-close></div>
+    <div class="coupon-modal__panel">
+      <button class="coupon-modal__close" data-coupon-close aria-label="Close">✕</button>
+
+      <div class="coupon-ticket">
+        <div class="coupon-ticket__top">
+          <span class="coupon-ticket__tag" id="cvTag">New Clients</span>
+          <span class="coupon-ticket__value" id="cvValue">15% OFF</span>
+          <span class="coupon-ticket__title" id="cvTitle">Your First Colour</span>
+        </div>
+        <div class="coupon-ticket__perf"></div>
+        <div class="coupon-ticket__bottom">
+          <div class="coupon-ticket__qr" aria-hidden="true">
+            <span>QR</span>
+          </div>
+          <div class="coupon-ticket__meta">
+            <p class="coupon-ticket__terms" id="cvTerms">Terms apply.</p>
+            <p class="coupon-ticket__expiry" id="cvExpiry">Valid until 31 Dec 2026</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="coupon-form" id="couponForm" novalidate>
+        <label class="coupon-form__label" for="couponEmail">Enter your email — we'll send your unique code:</label>
+        <div class="coupon-form__row">
+          <input type="email" id="couponEmail" class="coupon-form__input" placeholder="you@email.com" required autocomplete="email">
+          <button type="submit" class="btn btn--gold coupon-form__btn">Send my coupon</button>
+        </div>
+        <p class="coupon-form__note">One-time code · Show it at reception to redeem in salon.</p>
+      </form>
+
+      <div class="coupon-success" id="couponSuccess" hidden>
+        <div class="coupon-success__icon">✓</div>
+        <p class="coupon-success__text">Check your inbox! Your coupon is on its way.<br>Show it at reception to redeem.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=14"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hair Haven — 预订接入测试 (A/B)</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --ink: #1a1a1a;
+      --muted: #6b6b6b;
+      --line: #e6e1d8;
+      --accent: #1a1a1a;
+      --gold: #b08d57;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 480px; margin: 0 auto; padding: 24px 18px 64px; }
+
+    header { text-align: center; padding: 12px 0 20px; }
+    header h1 { font-size: 22px; letter-spacing: .5px; }
+    header p { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+    .note {
+      background: #fff8ea; border: 1px solid #f0e4c8; color: #6a5423;
+      font-size: 12.5px; padding: 12px 14px; border-radius: 10px; margin: 8px 0 26px;
+    }
+
+    .card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 16px; padding: 22px 18px; margin-bottom: 24px;
+    }
+    .tag {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+    }
+    .card h2 { font-size: 17px; margin-bottom: 6px; }
+    .card .desc { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+
+    /* 方案 A —— 跳转按钮 */
+    .book-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 15px 20px; border-radius: 10px;
+      background: var(--accent); color: #fff; font-size: 15px; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
+    }
+    .book-btn:active { opacity: .85; }
+    .book-btn svg { width: 20px; height: 20px; }
+
+    /* 方案 B —— 嵌入容器 */
+    #embed-slot { min-height: 44px; }
+
+    .expect { font-size: 12px; color: var(--muted); margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); }
+    .expect b { color: var(--ink); }
+
+    footer { text-align: center; font-size: 11.5px; color: var(--muted); margin-top: 30px; }
+    code { background: #efece5; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Hair Haven</h1>
+      <p>SumUp 预订接入 · 体验测试（方案 A / B）</p>
+    </header>
+
+    <div class="note">
+      这是一个测试页，只为对比两种预订接法的体验。接口用的是真实的
+      <code>haven-hair</code>。建议用手机打开逐个点。
+    </div>
+
+    <!-- ============ 方案 A：跳转按钮 ============ -->
+    <section class="card">
+      <span class="tag">方案 A · 跳转按钮</span>
+      <h2>立即预订（跳转到 SumUp）</h2>
+      <p class="desc">点击后在新标签页打开 SumUp 预订页，选项目 / 选时间 / 付款都在 SumUp 完成。</p>
+
+      <a class="book-btn"
+         href="https://www.sumupbookings.com/haven-hair"
+         target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        立即预订
+      </a>
+
+      <p class="expect">
+        <b>预期体验：</b>离开本页 → 到 <code>sumupbookings.com/haven-hair</code> → 在那边完成整个预订。你的网站不种 cookie。
+      </p>
+    </section>
+
+    <!-- ============ 方案 B：嵌入式小部件 ============ -->
+    <section class="card">
+      <span class="tag">方案 B · 嵌入式小部件</span>
+      <h2>立即预订（嵌在本页内）</h2>
+      <p class="desc">SumUp 的官方嵌入代码会在下面生成一个预订入口，客人不离开本页即可预订。</p>
+
+      <!-- SumUp 官方嵌入代码（来自你后台「网站集成」截图，原样保留） -->
+      <div id="embed-slot">
+        <!-- 开始 SumUp Bookings 嵌入代码 -->
+        <script src="https://www.sumupbookings.com/embed/sumup-bookings.js" data-slug="haven-hair" async></script>
+        <!-- 结束 SumUp Bookings 嵌入代码 -->
+      </div>
+
+      <p class="expect">
+        <b>预期体验：</b>SumUp 脚本加载后在此处出现预订按钮/表单，客人停留在本页完成预订。
+        <br>⚠️ 若这里一直空白：多半是脚本被拦截或 <code>file://</code> 直接打开不生效——需要用本地服务器（http）打开，我可以帮你起一个。
+      </p>
+    </section>
+
+    <footer>
+      测试文件 · test-booking.html · 仅用于对比 A / B，不是正式官网
+    </footer>
+  </div>
+</body>
+</html>

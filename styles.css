@@ -1,0 +1,420 @@
+/* ============================================================
+   Hair Haven — 官网样式（白底 · 黑金配色 · 手机端优先）
+   背景：白；文字：近黑；点缀：金；按钮：黑
+   字体：大标题 Playfair Display（衬线），正文 Nunito Sans
+   ============================================================ */
+
+:root{
+  /* 高级黑金配色 —— 拉丝金 #C8AD7E · 拉丝黑 #171716 · 浅钛灰 #BFBEBF */
+  --bg:        #ffffff;   /* 白色主背景（贴合 SumUp 白色浮层） */
+  --surface:   #f4f3f1;   /* 浅中性色带（交替板块 / 卡片背景） */
+  --surface-2: #eae8e4;
+  --ink:       #171716;   /* 拉丝黑（正文 / 大标题 / 按钮 / 页脚） */
+  --muted:     #847f79;   /* 次文字（灰） */
+  --line:      #e0dedb;   /* 浅色分隔线 */
+  --gray:      #bfbebf;   /* 浅钛灰（pill 描边等点缀） */
+  --gold:      #c8ad7e;   /* 拉丝金（描边 / hover / 深色区域文字） */
+  --gold-ink:  #8f7336;   /* 深金：白底上的金色文字（保证可读） */
+  --gold-hi:   #c8ad7e;   /* 拉丝金（hero / footer / 黑按钮上的金字） */
+  --gold-deep: #6a531f;
+  --maxw:      1080px;
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; scroll-padding-top:70px; scrollbar-width:none; -ms-overflow-style:none; }
+/* 全局隐藏滚动条（滚动功能保留） */
+*{ scrollbar-width:none; -ms-overflow-style:none; }
+*::-webkit-scrollbar{ width:0; height:0; display:none; }
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 20px; }
+
+/* ---------- 通用文字 ---------- */
+.eyebrow{
+  font-size:12px; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--gold-ink); font-weight:700; margin-bottom:10px;
+}
+.eyebrow--light{ color:var(--gold-ink); }
+.section__title{
+  font-family:var(--serif); font-weight:700; line-height:1.12;
+  font-size:31px; letter-spacing:.1px; color:var(--ink);
+}
+.section__title--light{ color:var(--ink); }
+.section__lead{ color:var(--muted); margin-top:14px; max-width:640px; font-size:15px; }
+.section__lead strong{ color:var(--gold-ink); font-weight:700; }
+/* 头发长度图例：紧跟在当前分类标题下方 */
+.lead-sizes{ margin:2px 0 14px; font-size:13px; color:var(--muted); letter-spacing:.01em; }
+.lead-sizes strong{ color:var(--gold-ink); font-weight:800; }
+/* 图例后面紧跟 W/B 说明时（Colour Packages），把两行详情之间的 gap 收紧 */
+.lead-sizes:has(+ .cat__note){ margin-bottom:4px; }
+
+/* ---------- 按钮 ---------- */
+.btn{
+  font-family:var(--sans); font-size:14px; font-weight:800; letter-spacing:.02em;
+  border:none; border-radius:999px; padding:13px 24px; cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center;
+  transition:transform .12s ease, opacity .12s ease, background .2s ease, box-shadow .2s ease;
+  white-space:nowrap; -webkit-user-select:none; user-select:none;
+}
+.btn:active{ transform:translateY(1px); }
+/* 主 CTA：黑底 + 金字（呼应黑金价目表） */
+.btn--gold{
+  background:#171716; color:var(--gold-hi);
+  border:1px solid var(--gold);                       /* 金色描边 */
+  box-shadow:0 0 16px rgba(200,173,126,.45), 0 8px 24px rgba(0,0,0,.35);  /* 金色发光 + 投影（呼吸动画的回退值） */
+  animation:breathe-glow 2.8s ease-in-out infinite;   /* 金色呼吸灯 */
+}
+.btn--gold:hover{ background:#000; color:#e6cd8c; }
+/* 金色呼吸灯：光晕由弱到强循环 */
+@keyframes breathe-glow{
+  0%, 100%{ box-shadow:0 0 8px rgba(200,173,126,.25), 0 8px 24px rgba(0,0,0,.35); }
+  50%     { box-shadow:0 0 28px rgba(200,173,126,.62), 0 8px 24px rgba(0,0,0,.35); }
+}
+/* 尊重「减少动态效果」偏好 */
+@media (prefers-reduced-motion: reduce){ .btn--gold{ animation:none; } }
+/* 无发光边缘变体（服务区顶部预订按钮用） */
+.btn--noglow{ border:none; animation:none; box-shadow:0 8px 22px rgba(0,0,0,.3); }
+.btn--noglow:hover{ box-shadow:0 8px 22px rgba(0,0,0,.3); }
+/* 描边（次要） */
+.btn--dark{ background:transparent; color:var(--ink); border:1px solid var(--ink); }
+.btn--dark:hover{ background:var(--ink); color:var(--gold-hi); }
+/* 导航预订按钮：黑底金字 */
+/* 导航预订按钮：首屏（hero 上）= 金色描边；滚动后 = 黑底金字 */
+.btn--book{ background:transparent; color:var(--gold-hi); border:1px solid var(--gold); padding:10px 20px; font-size:13px; }
+.btn--book:hover{ background:var(--gold); color:#211602; }
+.nav--scrolled .btn--book{ background:var(--ink); color:var(--gold-hi); border-color:var(--ink); }
+.nav--scrolled .btn--book:hover{ background:#000; color:#e6cd8c; }
+.btn--lg{ padding:16px 34px; font-size:15px; }
+
+/* ============================================================
+   预订浮层（自建，iframe 预加载）
+   ============================================================ */
+.booking-modal{ position:fixed; inset:0; z-index:200; display:none; }
+.booking-modal.open{ display:block; }
+.booking-modal__backdrop{ position:absolute; inset:0; background:rgba(15,12,10,.55); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
+.booking-modal__panel{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:min(480px,94vw); height:min(86vh,880px);
+  background:#fff; border-radius:18px; overflow:hidden;
+  box-shadow:0 24px 70px rgba(0,0,0,.45); display:flex; flex-direction:column;
+}
+.booking-modal__close{
+  position:absolute; right:12px; top:12px; z-index:2;
+  width:36px; height:36px; border:none; border-radius:50%;
+  background:rgba(0,0,0,.06); color:#171716; font-size:15px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+}
+.booking-modal__close:hover{ background:rgba(0,0,0,.12); }
+.booking-modal__frame{ flex:1; min-height:0; }
+.booking-modal__frame iframe{ width:100%; height:100%; border:none; display:block; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  background:transparent;
+  border-bottom:1px solid transparent;
+  transition:background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+}
+/* 滚过 hero 后：切换成白色导航栏 */
+.nav--scrolled{
+  background:rgba(255,255,255,.9); backdrop-filter:saturate(180%) blur(12px);
+  border-bottom-color:var(--line);
+}
+.nav__inner{
+  max-width:var(--maxw); margin:0 auto; padding:12px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.brand{
+  font-family:var(--serif); font-weight:700; font-size:21px; letter-spacing:.3px;
+  color:var(--gold-hi); transition:color .3s ease;
+}
+.nav--scrolled .brand{ color:var(--ink); }
+.nav__links{ display:none; }
+.nav__right{ display:flex; align-items:center; gap:10px; }
+
+.nav__toggle{
+  width:40px; height:40px; border:1px solid rgba(230,205,140,.4); border-radius:10px;
+  background:rgba(255,255,255,.06); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:4px; cursor:pointer;
+  transition:background .3s ease, border-color .3s ease;
+}
+.nav__toggle span{ width:18px; height:2px; background:var(--gold-hi); border-radius:2px; transition:.2s; }
+.nav--scrolled .nav__toggle{ background:#fff; border-color:var(--line); }
+.nav--scrolled .nav__toggle span{ background:var(--ink); }
+
+/* 移动端展开菜单 */
+.nav__links.open{
+  display:flex; flex-direction:column; gap:2px;
+  position:absolute; left:0; right:0; top:100%;
+  padding:8px 20px 16px;
+  transition:background .3s ease, border-color .3s ease;
+}
+/* 顶部（hero 上）：黑色下拉，跟透明黑金导航同步 */
+.nav__links.open{ background:rgba(16,13,11,.97); backdrop-filter:blur(8px); border-bottom:1px solid rgba(230,205,140,.18); }
+.nav__links.open a{
+  padding:12px 6px; font-size:15px; font-weight:600; color:#f2ead9;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.nav__links.open a:last-child{ border-bottom:none; }
+/* 滚动后：白色下拉，跟白色导航同步 */
+.nav--scrolled .nav__links.open{ background:rgba(255,255,255,.97); border-bottom-color:var(--line); }
+.nav--scrolled .nav__links.open a{ color:var(--ink); border-bottom-color:var(--line); }
+/* 顶部态菜单打开时：导航栏也变黑，与下拉融为一整块 */
+.nav:not(.nav--scrolled):has(.nav__links.open){ background:rgba(16,13,11,.97); backdrop-filter:blur(8px); }
+
+/* ============================================================
+   HERO（深色图片区，白字金饰——真实照片放进来时天然有对比）
+   ============================================================ */
+.hero{ position:relative; min-height:100vh; min-height:100svh; display:flex; align-items:center; overflow:hidden; padding-top:16vh; }
+.hero__media{ position:absolute; inset:0; background:#0c0a08; filter:blur(2px); transform:scale(1.03); }
+/* 手机端加载竖版裁切；电脑端在下方媒体查询换成横版 */
+.hero__media[data-img]{
+  background:#0c0a08 url("images/hero-mobile.jpg") center/cover no-repeat;
+}
+/* 黑色蒙层悬浮在图片上（保留黑底质感 + 透明度，确保文字可读） */
+.hero__overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(23,23,22,.62) 0%, rgba(23,23,22,.72) 45%, rgba(23,23,22,.85) 100%); }
+.hero__content{ position:relative; z-index:2; padding:40px 24px; max-width:720px; margin:0 auto; text-align:center; color:#fff; }
+.hero__eyebrow{ font-size:14px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold-hi); margin-bottom:18px; font-weight:800; line-height:1.9; }
+.hero__title{ font-family:var(--serif); font-weight:700; font-size:45px; line-height:1.05; letter-spacing:.3px; color:#fff; }
+.hero__sub{ margin:20px auto 30px; font-size:18px; font-weight:500; line-height:1.5; color:#f0e9de; max-width:460px; }
+.hero__note{ margin-top:18px; font-size:14px; font-weight:600; color:#ddd3c4; letter-spacing:.03em; }
+
+/* ============================================================
+   SECTION 通用
+   ============================================================ */
+.section{ padding:64px 0; }
+.section__cta{ margin-top:24px; text-align:center; }
+/* 服务区底部小字：居中、紧贴按钮下方、行距收紧 */
+.fineprint--center{ text-align:center; max-width:460px; margin:4px auto 0; line-height:1.35; }
+/* 服务区顶部预订入口：按钮 + 紧贴其下的小字 */
+.cta-block{ text-align:left; margin:24px 0 8px; }
+.cta-note{ font-size:12.5px; color:var(--muted); line-height:1.5; max-width:440px; margin:10px 0 0; }
+.fineprint{ margin-top:26px; font-size:12.5px; color:var(--muted); }
+
+/* ---------- 分类选项卡 ---------- */
+.chips-wrap{ position:relative; margin-bottom:2px; }
+.chips{
+  display:flex; gap:8px; overflow-x:auto; padding:22px 0 6px;
+  -webkit-overflow-scrolling:touch; scrollbar-width:none;
+}
+.chips::-webkit-scrollbar{ display:none; }
+/* 横向滑动引导：边缘渐隐 + 箭头（随滑动位置显隐） */
+.chips-wrap::before, .chips-wrap::after{
+  content:''; position:absolute; top:22px; bottom:6px; width:42px; z-index:2; pointer-events:none; opacity:0; transition:opacity .2s;
+}
+.chips-wrap::before{ left:0; background:linear-gradient(to right, var(--bg) 22%, transparent); }
+.chips-wrap::after{ right:0; background:linear-gradient(to left, var(--bg) 22%, transparent); }
+.chips-wrap.more-left::before{ opacity:1; }
+.chips-wrap.more-right::after{ opacity:1; }
+.chips-arrow{
+  position:absolute; top:22px; bottom:6px; display:flex; align-items:center;
+  z-index:3; font-size:28px; line-height:1; color:var(--gold-ink); font-weight:700;
+  pointer-events:none; opacity:0; transition:opacity .2s, color .15s; cursor:pointer;
+  -webkit-user-select:none; user-select:none;
+}
+.chips-arrow:active{ color:var(--gold); }
+.chips-arrow--left{ left:0; padding:0 14px 0 2px; }
+.chips-arrow--right{ right:0; padding:0 2px 0 14px; }
+.chips-wrap.more-left .chips-arrow--left{ opacity:1; pointer-events:auto; }
+.chips-wrap.more-right .chips-arrow--right{ opacity:1; pointer-events:auto; }
+.chip{
+  flex:0 0 auto; padding:11px 21px; border:1px solid var(--gray); border-radius:999px;
+  background:#fff; font-size:14.5px; font-weight:600; color:var(--ink);
+  cursor:pointer; font-family:var(--sans);
+}
+.chip:hover{ border-color:var(--gold); color:var(--gold-ink); }
+.chip.active{ background:var(--ink); color:#fff; border-color:var(--ink); }
+
+/* ---------- 服务菜单（分类切换：一次只显示一类） ---------- */
+/* 固定内容区高度：切换分类时整块高度不变，下方预订按钮不再跳动 */
+.cat{ display:none; padding-top:12px; scroll-margin-top:80px; min-height:415px; }
+.cat.active{ display:block; }
+.cat__title{ font-family:var(--serif); font-size:23px; font-weight:600; margin-bottom:4px; color:var(--gold-ink); }
+.cat__note{ font-size:12.5px; color:var(--muted); margin-bottom:8px; }
+.menu{ list-style:none; }
+/* 仅当项目超出时才固定高度 + 内部滚动 + 底部渐隐；能正常显示的分类不做滚动容器，不拦截整页滑动 */
+.menu.menu--scroll{
+  max-height:340px; overflow-y:auto;
+  -webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 80%,transparent 100%);
+}
+.item{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:16px;
+  padding:16px 0; border-bottom:1px solid var(--line);
+}
+.item__main{ display:flex; flex-direction:column; gap:3px; }
+.item__name{ font-size:15.5px; font-weight:700; color:var(--ink); }
+.item__meta{ font-weight:400; color:var(--muted); }
+.item__sizes{ font-size:12.5px; color:var(--muted); letter-spacing:.01em; }
+.item__price{ font-size:15px; font-weight:700; color:var(--gold-ink); white-space:nowrap; padding-top:1px; }
+
+/* ============================================================
+   OFFERS（暖白色带，与白色主背景区分）
+   ============================================================ */
+.offers{ background:var(--surface); color:var(--ink); padding:64px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.offer-grid{ display:grid; grid-template-columns:1fr; gap:16px; margin-top:28px; }
+.offer-card{
+  background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px 20px;
+  box-shadow:0 6px 20px rgba(26,22,19,.05);
+}
+.offer-card__tag{
+  display:inline-block; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold-hi); background:var(--ink);
+  padding:4px 10px; border-radius:999px; font-weight:800; margin-bottom:14px;
+}
+.offer-card h3{ font-family:var(--serif); font-size:21px; font-weight:600; margin-bottom:8px; color:var(--ink); }
+.offer-card p{ font-size:14px; color:var(--muted); }
+.offers__note{ margin-top:22px; font-size:12px; color:#a89d8e; }
+
+/* ---- 优惠券票根卡（Offers） ---- */
+.ticket-grid{ display:grid; grid-template-columns:1fr; gap:14px; margin-top:26px; }
+.ticket{
+  display:flex; align-items:stretch; width:100%; text-align:left; cursor:pointer;
+  background:transparent; border:none; padding:0; font-family:var(--sans);
+}
+.ticket__stub{
+  flex:0 0 100px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:linear-gradient(160deg,#221c12,#171716); color:var(--gold-hi);
+  border-radius:14px 0 0 14px; padding:16px 8px;
+}
+.ticket__value{ font-family:var(--serif); font-size:27px; font-weight:700; line-height:1; }
+.ticket__unit{ font-size:10px; letter-spacing:.16em; margin-top:5px; color:#d9c39a; }
+.ticket__body{
+  flex:1; background:#fff; border:1px solid var(--line); border-left:none;
+  border-radius:0 14px 14px 0; padding:16px 18px; display:flex; flex-direction:column; gap:5px; justify-content:center;
+  position:relative; transition:border-color .2s;
+}
+.ticket__body::before, .ticket__body::after{
+  content:''; position:absolute; left:-8px; width:15px; height:15px; border-radius:50%;
+  background:var(--surface); border:1px solid var(--line);
+}
+.ticket__body::before{ top:-8px; }
+.ticket__body::after{ bottom:-8px; }
+.ticket__tag{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-ink); font-weight:800; }
+.ticket__title{ font-family:var(--serif); font-size:19px; font-weight:600; color:var(--ink); }
+.ticket__cta{ font-size:13px; font-weight:700; color:var(--gold-ink); margin-top:2px; }
+.ticket:hover .ticket__body{ border-color:var(--gold); }
+.ticket:active{ transform:translateY(1px); }
+
+/* ---- 优惠券弹层 ---- */
+.coupon-modal{ position:fixed; inset:0; z-index:210; display:none; }
+.coupon-modal.open{ display:block; }
+.coupon-modal__backdrop{ position:absolute; inset:0; background:rgba(15,12,10,.6); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
+.coupon-modal__panel{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:min(420px,92vw); max-height:92vh; overflow:auto;
+  background:#fff; border-radius:20px; padding:22px; box-shadow:0 24px 70px rgba(0,0,0,.45);
+}
+.coupon-modal__close{
+  position:absolute; right:12px; top:12px; width:34px; height:34px; border:none; border-radius:50%;
+  background:rgba(0,0,0,.06); color:#171716; font-size:14px; cursor:pointer; z-index:2;
+}
+.coupon-ticket{ background:linear-gradient(160deg,#221c12,#171716); color:#fff; border-radius:16px; overflow:hidden; margin-top:8px; }
+.coupon-ticket__top{ padding:22px 22px 16px; text-align:center; }
+.coupon-ticket__tag{ display:inline-block; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#0f0d0b; background:var(--gold-hi); padding:4px 12px; border-radius:999px; font-weight:800; }
+.coupon-ticket__value{ display:block; font-family:var(--serif); font-size:44px; font-weight:700; color:var(--gold-hi); margin-top:14px; line-height:1; }
+.coupon-ticket__title{ display:block; font-size:15px; color:#e9e0cf; margin-top:8px; }
+.coupon-ticket__perf{ border-top:2px dashed rgba(255,255,255,.22); margin:0 16px; }
+.coupon-ticket__bottom{ padding:18px 22px 22px; display:flex; gap:16px; align-items:center; }
+.coupon-ticket__qr{ flex:0 0 84px; height:84px; background:#fff; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#c2c2c2; font-size:12px; letter-spacing:.2em; }
+.coupon-ticket__meta{ flex:1; min-width:0; }
+.coupon-ticket__terms{ font-size:11.5px; color:#c9bfb0; line-height:1.5; }
+.coupon-ticket__expiry{ font-size:11.5px; color:var(--gold-hi); margin-top:6px; font-weight:600; }
+.coupon-form{ margin-top:18px; }
+.coupon-form__label{ display:block; font-size:13.5px; font-weight:600; color:var(--ink); margin-bottom:10px; }
+.coupon-form__row{ display:flex; flex-direction:column; gap:10px; }
+.coupon-form__input{ width:100%; padding:12px 14px; border:1px solid var(--gray); border-radius:10px; font-size:15px; font-family:var(--sans); }
+.coupon-form__input:focus{ outline:none; border-color:var(--gold); }
+.coupon-form__btn{ width:100%; padding:13px; font-size:14px; }
+.coupon-form__note{ font-size:11.5px; color:var(--muted); margin-top:10px; text-align:center; }
+.coupon-success{ margin-top:20px; text-align:center; padding:6px 0 4px; }
+.coupon-success__icon{ width:52px; height:52px; margin:0 auto 12px; border-radius:50%; background:var(--gold-hi); color:#171716; font-size:26px; display:flex; align-items:center; justify-content:center; }
+.coupon-success__text{ font-size:14px; color:var(--ink); line-height:1.55; }
+
+/* ============================================================
+   SHOP
+   ============================================================ */
+.shop-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:26px; }
+.shop-card{ background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+.shop-card__img{ aspect-ratio:1/1; background:#f0ebe1; position:relative; }
+.shop-card__img::after{
+  content:"IMG"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  color:#c4b9a8; font-size:12px; letter-spacing:.2em;
+}
+.shop-card__body{ padding:12px 14px; display:flex; flex-direction:column; gap:2px; }
+.shop-card__name{ font-size:14px; font-weight:700; color:var(--ink); }
+.shop-card__price{ font-size:13px; color:var(--gold-ink); }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about{ background:var(--surface); padding:64px 0; }
+.about__inner{ display:grid; grid-template-columns:1fr; gap:28px; align-items:center; }
+.about__media{ aspect-ratio:4/3; border-radius:18px; position:relative;
+  background:radial-gradient(120% 90% at 30% 20%, #efe6d6 0%, #e6d8c2 60%, #dccaae 100%);
+  border:1px solid var(--line); }
+.about__media::after{ content:"IMG"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#bcaa8d; letter-spacing:.2em; font-size:12px; }
+.about__text p{ margin-top:14px; color:var(--muted); font-size:15px; }
+.about__text .btn{ margin-top:24px; }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact__inner{ display:grid; grid-template-columns:1fr; gap:40px; }
+.contact__address{ font-style:normal; font-size:16px; line-height:1.8; margin-top:16px; color:var(--ink); }
+.contact__maplink{ display:inline-block; margin-top:14px; color:var(--gold-ink); font-weight:700; font-size:14px; }
+.hours__title{ font-family:var(--serif); font-size:21px; font-weight:600; margin-bottom:12px; color:var(--gold-ink); }
+.hours{ list-style:none; margin-bottom:24px; }
+.hours li{ display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--line); font-size:14.5px; }
+.hours li span:first-child{ color:var(--ink); }
+.hours li span:last-child{ color:var(--muted); }
+
+/* ============================================================
+   FOOTER（黑底金字，收束整站，重申黑金）
+   ============================================================ */
+.footer{ background:var(--ink); color:#b8ac9a; padding:34px 0; }
+.footer__inner{ display:flex; flex-direction:column; gap:8px; align-items:center; text-align:center; }
+.footer__brand{ font-family:var(--serif); color:var(--gold-hi); font-size:21px; font-weight:600; }
+.footer__meta{ font-size:13px; }
+.footer__copy{ font-size:12px; color:#8a7f70; }
+
+/* ============================================================
+   桌面端适配
+   ============================================================ */
+@media (min-width:820px){
+  .nav__links{ display:flex; gap:26px; margin-left:auto; }
+  .nav__links a{ font-size:14px; font-weight:600; color:#efe7d9; transition:color .3s ease; }
+  .nav__links a:hover{ color:#fff; }
+  .nav--scrolled .nav__links a{ color:var(--ink); }
+  .nav--scrolled .nav__links a:hover{ color:var(--gold-ink); }
+  .nav__right{ margin-left:26px; }
+  .nav__toggle{ display:none; }
+
+  .hero__media[data-img]{ background-image:url("images/hero-desktop.jpg"); }
+  .hero__title{ font-size:60px; }
+  .hero__sub{ font-size:20px; }
+
+  .section{ padding:96px 0; }
+  .section__title{ font-size:40px; }
+
+  .offer-grid{ grid-template-columns:repeat(3,1fr); }
+  .ticket-grid{ grid-template-columns:repeat(3,1fr); }
+  .shop-grid{ grid-template-columns:repeat(3,1fr); }
+
+  .about__inner{ grid-template-columns:1fr 1fr; gap:56px; }
+  .contact__inner{ grid-template-columns:1fr 1fr; gap:64px; }
+
+  .menu{ column-gap:48px; }
+}
