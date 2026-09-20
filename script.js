@@ -39,14 +39,24 @@
   /* ---------- 服务分类切换：一次只显示一类 ---------- */
   var chips = document.querySelectorAll('.chip[data-cat]');
   var cats = document.querySelectorAll('.cat');
-  var sizeLegend = document.querySelector('.lead-sizes');
+  var activeCategoryTitle = document.getElementById('activeCategoryTitle');
+  function fitCategoryTitle() {
+    if (!activeCategoryTitle) return;
+    activeCategoryTitle.style.fontSize = '';
+    var fontSize = parseFloat(window.getComputedStyle(activeCategoryTitle).fontSize);
+    while (activeCategoryTitle.scrollWidth > activeCategoryTitle.clientWidth && fontSize > 13) {
+      fontSize -= 0.5;
+      activeCategoryTitle.style.fontSize = fontSize + 'px';
+    }
+  }
   function activateCat(id) {
     chips.forEach(function (c) { c.classList.toggle('active', c.dataset.cat === id); });
     cats.forEach(function (cat) { cat.classList.toggle('active', cat.id === id); });
-    // 把长短图例移动到当前分类标题的正下方
-    var activeCat = document.getElementById(id);
-    var title = activeCat && activeCat.querySelector('.cat__title');
-    if (sizeLegend && title) title.insertAdjacentElement('afterend', sizeLegend);
+    var categoryTitle = document.querySelector('#' + id + ' .cat__title');
+    if (activeCategoryTitle && categoryTitle) {
+      activeCategoryTitle.textContent = categoryTitle.textContent.trim();
+      fitCategoryTitle();
+    }
     // 只有自然高度超过阈值（约 6 项）的分类才启用固定高度内部滚动；
     // 其余分类保持正常流，不做滚动容器，避免拦截整页滑动
     var menu = document.querySelector('#' + id + ' .menu');
@@ -65,28 +75,25 @@
     activateCat(chips[0].dataset.cat);   // 默认显示第一类（Haircuts）
   }
 
-  /* ---------- 分类条横向滑动：左右箭头引导 ---------- */
-  var chipsScroller = document.getElementById('chips');
-  var chipsWrap = document.querySelector('.chips-wrap');
-  function updateChipArrows() {
-    if (!chipsScroller || !chipsWrap) return;
-    var max = chipsScroller.scrollWidth - chipsScroller.clientWidth;
-    chipsWrap.classList.toggle('more-left', chipsScroller.scrollLeft > 4);
-    chipsWrap.classList.toggle('more-right', chipsScroller.scrollLeft < max - 4);
+  function updateChipScrollState(row) {
+    var scroller = row.querySelector('.chips');
+    if (!scroller) return;
+    var maxScroll = scroller.scrollWidth - scroller.clientWidth;
+    row.classList.toggle('chips-row--has-left', scroller.scrollLeft > 1);
+    row.classList.toggle('chips-row--has-right', maxScroll > 1 && scroller.scrollLeft < maxScroll - 1);
   }
-  if (chipsScroller) {
-    chipsScroller.addEventListener('scroll', updateChipArrows, { passive: true });
-    window.addEventListener('resize', updateChipArrows);
-    updateChipArrows();
-    // 点击箭头 → 横向翻一页
-    function scrollChips(dir) {
-      chipsScroller.scrollBy({ left: dir * chipsScroller.clientWidth * 0.8, behavior: 'smooth' });
-    }
-    var arrowL = document.querySelector('.chips-arrow--left');
-    var arrowR = document.querySelector('.chips-arrow--right');
-    if (arrowL) arrowL.addEventListener('click', function () { scrollChips(-1); });
-    if (arrowR) arrowR.addEventListener('click', function () { scrollChips(1); });
-  }
+  var chipRows = document.querySelectorAll('.chips-row');
+  chipRows.forEach(function (row) {
+    var scroller = row.querySelector('.chips');
+    if (!scroller) return;
+    scroller.addEventListener('scroll', function () { updateChipScrollState(row); }, { passive: true });
+    updateChipScrollState(row);
+  });
+  window.addEventListener('resize', function () {
+    fitCategoryTitle();
+    chipRows.forEach(updateChipScrollState);
+  });
+  window.addEventListener('load', fitCategoryTitle);
 
   /* ---------- Booking ---------- */
   var bookingModal = document.getElementById('bookingModal');
@@ -175,10 +182,86 @@
   document.querySelectorAll('[data-hh-book]').forEach(function (btn) {
     btn.addEventListener('click', openBooking);
   });
+  document.querySelectorAll('.menu .item').forEach(function (item) {
+    var serviceName = item.querySelector('.item__name');
+    item.classList.add('item--bookable');
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    if (serviceName) item.setAttribute('aria-label', 'Book ' + serviceName.textContent.trim());
+    item.addEventListener('click', openBooking);
+    item.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      openBooking();
+    });
+  });
   document.querySelectorAll('[data-hh-close]').forEach(function (btn) {
     btn.addEventListener('click', closeBooking);
   });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeBooking(); });
+
+  var callModal = document.getElementById('callModal');
+  var callCopyButton = document.getElementById('callCopyButton');
+  var callCopyStatus = document.getElementById('callCopyStatus');
+  var callNumber = '02046371102';
+
+  function openCall() {
+    if (!callModal) return;
+    callModal.classList.add('open');
+    callModal.setAttribute('aria-hidden', 'false');
+    if (callCopyStatus) callCopyStatus.textContent = '';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCall() {
+    if (!callModal) return;
+    callModal.classList.remove('open');
+    callModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function setCopyStatus(message) {
+    if (callCopyStatus) callCopyStatus.textContent = message;
+  }
+
+  function fallbackCopyCallNumber() {
+    var input = document.createElement('textarea');
+    input.value = callNumber;
+    input.setAttribute('readonly', '');
+    input.style.position = 'fixed';
+    input.style.opacity = '0';
+    document.body.appendChild(input);
+    input.select();
+    try {
+      document.execCommand('copy');
+      setCopyStatus('Number copied');
+    } catch (error) {
+      setCopyStatus('Please copy the number above');
+    }
+    document.body.removeChild(input);
+  }
+
+  function copyCallNumber() {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(callNumber).then(function () {
+        setCopyStatus('Number copied');
+      }, fallbackCopyCallNumber);
+      return;
+    }
+    fallbackCopyCallNumber();
+  }
+
+  document.querySelectorAll('[data-hh-call]').forEach(function (btn) {
+    btn.addEventListener('click', openCall);
+  });
+  document.querySelectorAll('[data-hh-call-close]').forEach(function (btn) {
+    btn.addEventListener('click', closeCall);
+  });
+  if (callCopyButton) callCopyButton.addEventListener('click', copyCallNumber);
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    closeBooking();
+    closeCall();
+  });
 
   /* ---------- 优惠券弹层：点券 → 显示详情 + 邮箱表单 ---------- */
   var couponModal = document.getElementById('couponModal');

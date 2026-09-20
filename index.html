@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://widget.treatwell.co.uk" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=42">
+  <link rel="stylesheet" href="styles.css?v=61">
 </head>
 <body>
 
@@ -108,53 +108,60 @@
     <div class="wrap">
       <p class="eyebrow">Our Menu</p>
       <h2 class="section__title">Services &amp; Prices</h2>
-      <p class="section__lead">Choose a service, then pick a time. For major colour changes, please book or request a consultation first. Colour prices vary by hair length.</p>
-      <p class="lead-sizes"><strong>S</strong> short · <strong>M</strong> medium · <strong>L</strong> long · <strong>ExL</strong> extra long.</p>
+      <p class="section__lead">Choose a service, then pick a time. Prices and durations follow our current Treatwell menu. For major colour changes, please book or request a consultation first.</p>
 
-      <!-- 分类选项卡：点一个只显示一类；左右可横向滑动，箭头引导 -->
+      <div class="section__cta section__cta--services">
+        <button class="booking-text-link booking-text-link--call" type="button" data-hh-call>Call us <span aria-hidden="true">&#8594;</span></button>
+        <button class="booking-text-link" type="button" data-hh-book>Book Your Appointment <span aria-hidden="true">&#8594;</span></button>
+      </div>
+
+      <div class="popular-services" aria-labelledby="popular-services-title">
+        <h3 class="popular-services__title" id="popular-services-title">Popular Services</h3>
+        <ul class="menu popular-services__list">
+          <li class="item"><div class="item__main"><span class="item__name">Gel Manicure &amp; gel Pedicure</span><span class="item__sizes">1 hr 10 mins</span></div><span class="item__price">from £67.50</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Gel Manicure</span><span class="item__sizes">30 mins</span></div><span class="item__price">£30</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Gel Removal</span><span class="item__sizes">10 mins - 30 mins</span></div><span class="item__price">from £5</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Ladies' - Wash &amp; Blow Dry</span><span class="item__sizes">30 mins - 1 hr</span></div><span class="item__price">from £35</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Ladies' - Wash, Haircut &amp; Blow Dry with Stylist</span><span class="item__sizes">45 mins - 1 hr 30 mins</span></div><span class="item__price">from £45</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men - Wash, Haircut &amp; Styling with Stylist</span><span class="item__sizes">45 mins</span></div><span class="item__price">£35</span></li>
+        </ul>
+      </div>
+
+      <h3 class="cat__title cat__title--control" id="activeCategoryTitle">Ladies' Haircuts &amp; Hairdressing</h3>
+
+      <!-- 服务分类：美发与美甲分两行显示 -->
       <div class="chips-wrap">
-        <span class="chips-arrow chips-arrow--left" aria-hidden="true">‹</span>
-        <div class="chips" id="chips" role="tablist">
-          <button class="chip" data-cat="cat-haircuts">Haircuts</button>
-          <button class="chip" data-cat="cat-colour">Colour</button>
-          <button class="chip" data-cat="cat-packages">Colour Packages</button>
+        <div class="chips-row">
+          <div class="chips" role="tablist" aria-label="Hair services">
+          <button class="chip" data-cat="cat-ladies-haircuts">Ladies</button>
           <button class="chip" data-cat="cat-mens">Men's</button>
+          <button class="chip" data-cat="cat-colour">Colour</button>
+          <button class="chip" data-cat="cat-packages">Packages</button>
           <button class="chip" data-cat="cat-treatments">Treatments</button>
-          <button class="chip" data-cat="cat-nails">Nails</button>
+          <button class="chip" data-cat="cat-japanese">Japanese</button>
+          <button class="chip" data-cat="cat-children">Children</button>
+          </div>
         </div>
-        <span class="chips-arrow chips-arrow--right" aria-hidden="true">›</span>
+
+        <div class="chips-row">
+          <div class="chips" role="tablist" aria-label="Nail services">
+          <button class="chip" data-cat="cat-nail-extras">Nail Extras</button>
+          <button class="chip" data-cat="cat-mens-nails">Men's Nails</button>
+          <button class="chip" data-cat="cat-manicures">Manicure &amp; Pedicure</button>
+          <button class="chip" data-cat="cat-gel-polish">Gel Polish</button>
+          <button class="chip" data-cat="cat-extensions">Extensions</button>
+          </div>
+        </div>
       </div>
 
-      <!-- Haircuts -->
-      <div class="cat" id="cat-haircuts">
-        <h3 class="cat__title">Haircuts</h3>
+      <!-- Ladies' Haircuts & Hairdressing -->
+      <div class="cat" id="cat-ladies-haircuts">
+        <h3 class="cat__title">Ladies' Haircuts &amp; Hairdressing</h3>
         <ul class="menu">
-          <li class="item"><div class="item__main"><span class="item__name">Ladies — Fringe</span></div><span class="item__price">£10</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Men's — Dry Cut</span></div><span class="item__price">£28</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Kids — Boy Haircut <span class="item__meta">(under 12)</span></span></div><span class="item__price">£20</span></li>
-        </ul>
-      </div>
-
-      <!-- Colour -->
-      <div class="cat" id="cat-colour">
-        <h3 class="cat__title">Colour</h3>
-        <ul class="menu">
-          <li class="item"><div class="item__main"><span class="item__name">Full Head Colour</span><span class="item__sizes">S £65 · M £80 · L £95 · ExL £110</span></div><span class="item__price">from £65</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Full Head Highlights</span><span class="item__sizes">S £100 · M £125 · L £150</span></div><span class="item__price">from £100</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Full Head Bleach</span><span class="item__sizes">S £90 · M £105 · L £120</span></div><span class="item__price">from £90</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Balayage</span><span class="item__sizes">M £170 · L £210</span></div><span class="item__price">from £170</span></li>
-        </ul>
-      </div>
-
-      <!-- Colour Packages -->
-      <div class="cat" id="cat-packages">
-        <h3 class="cat__title">Colour Packages</h3>
-        <p class="cat__note">W/B = Wash &amp; Blow-dry · W/C/B = Wash, Cut &amp; Blow-dry</p>
-        <ul class="menu">
-          <li class="item"><div class="item__main"><span class="item__name">Full Head Colour + W/B</span><span class="item__sizes">S £95 · M £115 · L £135</span></div><span class="item__price">from £95</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Full Head Colour + W/C/B</span><span class="item__sizes">S £105 · M £125 · L £145</span></div><span class="item__price">from £105</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Add-on — Full Tint Colour</span><span class="item__sizes">S £40 · M £50 · L £60</span></div><span class="item__price">from £40</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Add-on — Root Colour</span></div><span class="item__price">£30</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Ladies' - Wash &amp; Blow Dry</span><span class="item__sizes">30 mins - 1 hr</span></div><span class="item__price">from £35</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Hair Up</span><span class="item__sizes">1 hr</span></div><span class="item__price">£60</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Ladies' - Wash, Haircut &amp; Blow Dry with Stylist</span><span class="item__sizes">45 mins - 1 hr 30 mins</span></div><span class="item__price">from £45</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Ladies' - Fringe Trim</span><span class="item__sizes">10 mins</span></div><span class="item__price">£10</span></li>
         </ul>
       </div>
 
@@ -162,46 +169,143 @@
       <div class="cat" id="cat-mens">
         <h3 class="cat__title">Men's</h3>
         <ul class="menu">
-          <li class="item"><div class="item__main"><span class="item__name">F/Tint + Wash &amp; Cut</span></div><span class="item__price">£70</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">F/Tint Only</span></div><span class="item__price">from £40</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Dry Cut</span></div><span class="item__price">£28</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Dry Haircut</span><span class="item__sizes">30 mins</span></div><span class="item__price">£30</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men - Bleaching</span><span class="item__sizes">1 hr 45 mins</span></div><span class="item__price">£70</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men - Hair Colouring</span><span class="item__sizes">1 hr - 3 hrs 15 mins</span></div><span class="item__price">from £35</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men - Hair Permanent Perm</span><span class="item__sizes">2 hrs 45 mins - 3 hrs 15 mins</span></div><span class="item__price">from £80</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men - Permanent Straightening</span><span class="item__sizes">3 hrs</span></div><span class="item__price">£150</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men - Wash, Haircut &amp; Styling with Stylist</span><span class="item__sizes">45 mins</span></div><span class="item__price">£35</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men - Wash, Haircut &amp; Styling with Style Director</span><span class="item__sizes">45 mins</span></div><span class="item__price">£45</span></li>
         </ul>
       </div>
 
-      <!-- Treatments -->
+      <!-- Ladies' Hair Colour & Highlights -->
+      <div class="cat" id="cat-colour">
+        <h3 class="cat__title">Ladies' Hair Colour &amp; Highlights</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Add on Base colour when having Highlights or Balayage</span><span class="item__sizes">30 mins</span></div><span class="item__price">from £30</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Toner</span><span class="item__sizes">20 mins</span></div><span class="item__price">from £45</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Root Tint Colour</span><span class="item__sizes">1 hr 45 mins</span></div><span class="item__price">£55</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Colour</span><span class="item__sizes">45 mins - 1 hr</span></div><span class="item__price">from £65</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Root Bleach</span><span class="item__sizes">1 hr</span></div><span class="item__price">£75</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Bleach</span><span class="item__sizes">1 hr - 1 hr 30 mins</span></div><span class="item__price">from £90</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">T-Section Highlights</span><span class="item__sizes">45 mins</span></div><span class="item__price">from £60</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Half Head Highlights</span><span class="item__sizes">1 hr - 1 hr 15 mins</span></div><span class="item__price">from £80</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Highlights</span><span class="item__sizes">1 hr 15 mins - 1 hr 30 mins</span></div><span class="item__price">from £100</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Balayage</span><span class="item__sizes">1 hr 30 mins</span></div><span class="item__price">from £180</span></li>
+        </ul>
+      </div>
+
+      <!-- Ladies' Hair Colour & Highlights Packages -->
+      <div class="cat" id="cat-packages">
+        <h3 class="cat__title">Ladies' Hair Colour &amp; Highlights Packages</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Add On - Colour</span><span class="item__sizes">30 mins</span></div><span class="item__price">£30</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Add On - Full Tint Colour</span><span class="item__sizes">1 hr 30 mins</span></div><span class="item__price">from £40</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Root Colour + Wash &amp; Blow Dry</span><span class="item__sizes">2 hrs - 2 hrs 15 mins</span></div><span class="item__price">from £80</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Root Colour + Wash, Haircut &amp; Blow Dry</span><span class="item__sizes">2 hrs 15 mins - 2 hrs 30 mins</span></div><span class="item__price">from £90</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Colour + Wash &amp; Blow Dry</span><span class="item__sizes">2 hrs - 2 hrs 30 mins</span></div><span class="item__price">from £95</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Colour + Wash, Haircut &amp; Blow Dry</span><span class="item__sizes">2 hrs 15 mins - 2 hrs 45 mins</span></div><span class="item__price">from £105</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">T-Section Highlights + Toner + Wash &amp; Blow Dry</span><span class="item__sizes">2 hrs 15 mins - 2 hrs 45 mins</span></div><span class="item__price">from £115</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">T-Section Highlights + Toner + Wash, Haircut &amp; Blow Dry</span><span class="item__sizes">2 hrs 15 mins - 2 hrs 45 mins</span></div><span class="item__price">from £120</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Half Head Highlights + Toner + Wash &amp; Blow Dry</span><span class="item__sizes">2 hrs 30 mins - 3 hrs 15 mins</span></div><span class="item__price">from £130</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Half Head Highlights + Toner + Wash, Haircut &amp; Blow Dry</span><span class="item__sizes">2 hrs 30 mins - 3 hrs 15 mins</span></div><span class="item__price">from £135</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Highlights + Toner + Wash &amp; Blow Dry</span><span class="item__sizes">3 hrs - 3 hrs 30 mins</span></div><span class="item__price">from £145</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Head Highlights + Toner + Wash, Haircut &amp; Blow Dry</span><span class="item__sizes">3 hrs 15 mins - 3 hrs 30 mins</span></div><span class="item__price">from £150</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Balayage + Toner + Wash &amp; Blow Dry</span><span class="item__sizes">3 hrs 15 mins - 3 hrs 30 mins</span></div><span class="item__price">from £245</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Balayage + Toner + Wash, Haircut &amp; Blow Dry</span><span class="item__sizes">3 hrs 45 mins</span></div><span class="item__price">from £250</span></li>
+        </ul>
+      </div>
+
+      <!-- Hair Treatments -->
       <div class="cat" id="cat-treatments">
-        <h3 class="cat__title">Treatments</h3>
+        <h3 class="cat__title">Hair Treatments</h3>
         <ul class="menu">
-          <li class="item"><div class="item__main"><span class="item__name">Scalp &amp; Hair Treatment Set</span></div><span class="item__price">£50</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Scalp Treatment</span></div><span class="item__price">£30</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Hair Repair Treatment</span><span class="item__sizes">30 mins - 40 mins</span></div><span class="item__price">from £30</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Ladies' Permanent Perm</span><span class="item__sizes">1 hr 30 mins</span></div><span class="item__price">£120</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Permanent Hair Straightening</span><span class="item__sizes">3 hrs 30 mins</span></div><span class="item__price">£250</span></li>
         </ul>
       </div>
 
-      <!-- Nails -->
-      <div class="cat" id="cat-nails">
-        <h3 class="cat__title">Nails</h3>
+      <!-- Japanese Style - Haircuts & Hairdressing -->
+      <div class="cat" id="cat-japanese">
+        <h3 class="cat__title">Japanese Style - Haircuts &amp; Hairdressing</h3>
         <ul class="menu">
-          <li class="item"><div class="item__main"><span class="item__name">Full Set — Acrylic &amp; Gel Polish</span><span class="item__sizes">from · 60 min</span></div><span class="item__price">£50</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Full Set — Biab &amp; Gel Polish</span><span class="item__sizes">60 min</span></div><span class="item__price">£55</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Full Set — Ombre</span><span class="item__sizes">from · 60 min</span></div><span class="item__price">£50</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Acrylic Infill — Acrylic &amp; Gel Polish</span><span class="item__sizes">50 min</span></div><span class="item__price">£45</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Full Manicure — Gel Polish with Biab</span><span class="item__sizes">35 min</span></div><span class="item__price">£45</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Express Gel Polish with Biab</span><span class="item__sizes">30 min</span></div><span class="item__price">£40</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Full Manicure with Gel Polish</span><span class="item__sizes">30 min</span></div><span class="item__price">£30</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Express Gel Polish <span class="item__meta">(file &amp; polish)</span></span><span class="item__sizes">20 min</span></div><span class="item__price">£25</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Cat Eye / Chrome</span></div><span class="item__price">£10</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Add-on — French Tip &amp; Nail Art</span><span class="item__sizes">from</span></div><span class="item__price">£10</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Add-on — Soak Off for Acrylic</span><span class="item__sizes">10 min</span></div><span class="item__price">£15</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Add-on — Soak Off Gel</span><span class="item__sizes">10 min</span></div><span class="item__price">£12</span></li>
-          <li class="item"><div class="item__main"><span class="item__name">Add-on — Nail Repair</span><span class="item__sizes">from</span></div><span class="item__price">£5</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Wash &amp; Style</span><span class="item__sizes">45 mins - 1 hr 15 mins</span></div><span class="item__price">from £50</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Ladies' - Wash, Haircut &amp; Style</span><span class="item__sizes">1 hr - 1 hr 45 mins</span></div><span class="item__price">from £55</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men Wash Cut &amp; Style</span><span class="item__sizes">1 hr</span></div><span class="item__price">£45</span></li>
         </ul>
       </div>
 
-      <div class="section__cta">
-        <button class="btn btn--gold btn--lg btn--noglow" data-hh-book>Book Your Appointment</button>
+      <!-- Children - Haircuts & Hairdressing -->
+      <div class="cat" id="cat-children">
+        <h3 class="cat__title">Children - Haircuts &amp; Hairdressing</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Girl Hair Cut <span class="item__meta">(Under 12 Years Old)</span></span><span class="item__sizes">30 mins - 45 mins</span></div><span class="item__price">from £25</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Boy's Haircut <span class="item__meta">(Under 12 Years Old)</span></span><span class="item__sizes">30 mins</span></div><span class="item__price">from £20</span></li>
+        </ul>
       </div>
 
-      <p class="fineprint fineprint--center">Prices are indicative and confirmed at the time of booking. A consultation may be recommended for colour services.</p>
+      <!-- Nail Extras -->
+      <div class="cat" id="cat-nail-extras">
+        <h3 class="cat__title">Nail Extras</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Add On - Spa Pedicure: Milk &amp; Rose</span><span class="item__sizes">10 mins</span></div><span class="item__price">£5</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Nail Repair</span><span class="item__sizes">10 mins</span></div><span class="item__price">£5</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Gel Removal</span><span class="item__sizes">10 mins - 30 mins</span></div><span class="item__price">from £5</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Nail Designs</span><span class="item__sizes">10 mins</span></div><span class="item__price">£10</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Acrylic Removal</span><span class="item__sizes">10 mins</span></div><span class="item__price">£15</span></li>
+        </ul>
+      </div>
+
+      <!-- Men's Manicures & Pedicures -->
+      <div class="cat" id="cat-mens-nails">
+        <h3 class="cat__title">Men's Manicures &amp; Pedicures</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Men's Manicure</span><span class="item__sizes">20 mins</span></div><span class="item__price">£20</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men's Pedicure</span><span class="item__sizes">30 mins</span></div><span class="item__price">£35</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Men's Manicure &amp; Pedicure</span><span class="item__sizes">1 hr</span></div><span class="item__price">£55</span></li>
+        </ul>
+      </div>
+
+      <!-- Manicures & Pedicures -->
+      <div class="cat" id="cat-manicures">
+        <h3 class="cat__title">Manicures &amp; Pedicures</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Regular Polish Change</span><span class="item__sizes">10 mins</span></div><span class="item__price">£15</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Regular Manicure with Regular Polish</span><span class="item__sizes">20 mins</span></div><span class="item__price">£20</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Manicure &amp; Full Pedicure with Regular Polish</span><span class="item__sizes">1 hr</span></div><span class="item__price">£55</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Gel Pedicure</span><span class="item__sizes">35 mins</span></div><span class="item__price">£45</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Regular Pedicure with Regular Polish</span><span class="item__sizes">30 mins</span></div><span class="item__price">£35</span></li>
+        </ul>
+      </div>
+
+      <!-- Gel Polish -->
+      <div class="cat" id="cat-gel-polish">
+        <h3 class="cat__title">Gel Polish</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Express Gel Polish</span><span class="item__sizes">15 mins</span></div><span class="item__price">£25</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">File &amp; Gel Polish</span><span class="item__sizes">20 mins</span></div><span class="item__price">£25</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Gel Manicure</span><span class="item__sizes">30 mins</span></div><span class="item__price">£30</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Gel Manicure &amp; gel Pedicure</span><span class="item__sizes">1 hr 10 mins</span></div><span class="item__price">from £67.50</span></li>
+        </ul>
+      </div>
+
+      <!-- Nail Extensions -->
+      <div class="cat" id="cat-extensions">
+        <h3 class="cat__title">Nail Extensions</h3>
+        <ul class="menu">
+          <li class="item"><div class="item__main"><span class="item__name">Acrylic Two Big Toes Infills</span><span class="item__sizes">10 mins</span></div><span class="item__price">£8</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Acrylic Two Big Toes Extensions</span><span class="item__sizes">10 mins</span></div><span class="item__price">£10</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Ombré Infills</span><span class="item__sizes">50 mins</span></div><span class="item__price">£45</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Infills Acrylic &amp; Gel Polish</span><span class="item__sizes">50 mins</span></div><span class="item__price">£45</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Infills BIAB &amp; Gel Polish</span><span class="item__sizes">1 hr</span></div><span class="item__price">£50</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Set Ombré Extensions</span><span class="item__sizes">1 hr</span></div><span class="item__price">£50</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Set Acrylic &amp; Gel Polish Extensions</span><span class="item__sizes">1 hr</span></div><span class="item__price">£50</span></li>
+          <li class="item"><div class="item__main"><span class="item__name">Full Set BIAB &amp; Gel Polish Extensions</span><span class="item__sizes">1 hr</span></div><span class="item__price">£55</span></li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
@@ -215,8 +319,8 @@
         <div class="shop-card"><div class="shop-card__img" data-img="product"></div><div class="shop-card__body"><span class="shop-card__name">Product Name</span><span class="shop-card__price">£00</span></div></div>
         <div class="shop-card"><div class="shop-card__img" data-img="product"></div><div class="shop-card__body"><span class="shop-card__name">Product Name</span><span class="shop-card__price">£00</span></div></div>
         <div class="shop-card"><div class="shop-card__img" data-img="product"></div><div class="shop-card__body"><span class="shop-card__name">Gift Card</span><span class="shop-card__price">from £00</span></div></div>
+        <div class="shop-card"><div class="shop-card__img" data-img="product"></div><div class="shop-card__body"><span class="shop-card__name">Product Name</span><span class="shop-card__price">£00</span></div></div>
       </div>
-      <p class="fineprint">Shop coming soon</p>
       <!-- 占位板块，日后接 SumUp 付款链接 / 在线商店。 -->
     </div>
   </section>
@@ -259,7 +363,7 @@
           <li><span>Saturday</span><span>11:00 – 20:00</span></li>
           <li><span>Sunday</span><span>11:00 – 20:00</span></li>
         </ul>
-        <button class="btn btn--gold" data-hh-book>Book an Appointment</button>
+        <button class="btn btn--gold contact__book" data-hh-book>Book an Appointment</button>
       </div>
     </div>
   </section>
@@ -298,6 +402,20 @@
         <button class="booking-fallback__retry" id="bookingRetry" type="button">Try again</button>
       </section>
     </div>
+  </div>
+
+  <div class="call-modal" id="callModal" role="dialog" aria-modal="true" aria-labelledby="callModalTitle" aria-hidden="true">
+    <div class="call-modal__backdrop" data-hh-call-close></div>
+    <section class="call-modal__panel">
+      <button class="booking-modal__close" type="button" data-hh-call-close aria-label="Close">✕</button>
+      <div class="call-modal__content">
+        <p class="call-modal__eyebrow">Hair Haven</p>
+        <h2 class="call-modal__title" id="callModalTitle">Call us</h2>
+        <a class="call-modal__number" href="tel:+442046371102">020 4637 1102</a>
+        <button class="call-modal__copy" id="callCopyButton" type="button">Copy number</button>
+        <p class="call-modal__status" id="callCopyStatus" aria-live="polite"></p>
+      </div>
+    </section>
   </div>
 
   <!-- ============ 优惠券弹层 ============ -->
