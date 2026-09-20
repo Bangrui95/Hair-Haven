@@ -474,7 +474,7 @@ a{ color:inherit; text-decoration:none; }
 
   .offer-grid{ grid-template-columns:repeat(3,1fr); }
   .ticket-grid{ grid-template-columns:repeat(3,1fr); }
-  .shop-grid{ grid-template-columns:repeat(3,1fr); }
+  .shop-grid{ grid-template-columns:repeat(4,1fr); }
 
   .about__inner{ grid-template-columns:1fr 1fr; gap:56px; }
   .contact__inner{ grid-template-columns:1fr 1fr; gap:64px; }
