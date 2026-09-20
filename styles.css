@@ -71,20 +71,12 @@ a{ color:inherit; text-decoration:none; }
 /* 主 CTA：黑底 + 金字（呼应黑金价目表） */
 .btn--gold{
   background:#171716; color:var(--gold-hi);
-  border:1px solid var(--gold);                       /* 金色描边 */
-  box-shadow:0 0 16px rgba(200,173,126,.45), 0 8px 24px rgba(0,0,0,.35);  /* 金色发光 + 投影（呼吸动画的回退值） */
-  animation:breathe-glow 2.8s ease-in-out infinite;   /* 金色呼吸灯 */
+  border:1px solid var(--gold);
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
 }
 .btn--gold:hover{ background:#000; color:#e6cd8c; }
-/* 金色呼吸灯：光晕由弱到强循环 */
-@keyframes breathe-glow{
-  0%, 100%{ box-shadow:0 0 8px rgba(200,173,126,.25), 0 8px 24px rgba(0,0,0,.35); }
-  50%     { box-shadow:0 0 28px rgba(200,173,126,.62), 0 8px 24px rgba(0,0,0,.35); }
-}
-/* 尊重「减少动态效果」偏好 */
-@media (prefers-reduced-motion: reduce){ .btn--gold{ animation:none; } }
-/* 无发光边缘变体（服务区顶部预订按钮用） */
-.btn--noglow{ border:none; animation:none; box-shadow:0 8px 22px rgba(0,0,0,.3); }
+/* 无描边变体（服务区顶部预订按钮用） */
+.btn--noglow{ border:none; box-shadow:0 8px 22px rgba(0,0,0,.3); }
 .btn--noglow:hover{ box-shadow:0 8px 22px rgba(0,0,0,.3); }
 /* 描边（次要） */
 .btn--dark{ background:transparent; color:var(--ink); border:1px solid var(--ink); }
