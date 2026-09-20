@@ -57,15 +57,10 @@
       activeCategoryTitle.textContent = categoryTitle.textContent.trim();
       fitCategoryTitle();
     }
-    // 只有自然高度超过阈值（约 6 项）的分类才启用固定高度内部滚动；
-    // 其余分类保持正常流，不做滚动容器，避免拦截整页滑动
+    // 所有分类共用固定服务列表高度；内容超出时在列表内滚动。
     var menu = document.querySelector('#' + id + ' .menu');
     if (menu) {
-      menu.classList.remove('menu--scroll');        // 先还原，测量自然高度
-      if (menu.scrollHeight > 340) {                // 需要滚动
-        menu.classList.add('menu--scroll');
-        menu.scrollTop = 0;
-      }
+      menu.scrollTop = 0;
     }
   }
   if (chips.length) {
@@ -200,15 +195,22 @@
   });
 
   var callModal = document.getElementById('callModal');
-  var callCopyButton = document.getElementById('callCopyButton');
-  var callCopyStatus = document.getElementById('callCopyStatus');
-  var callNumber = '02046371102';
+  var callModalTitle = document.getElementById('callModalTitle');
+  var callModalMessage = document.getElementById('callModalMessage');
+  var callBookButton = document.getElementById('callBookButton');
+  var callOfferNote = document.getElementById('callOfferNote');
 
-  function openCall() {
+  function openCall(showOfferMessage) {
     if (!callModal) return;
     callModal.classList.add('open');
     callModal.setAttribute('aria-hidden', 'false');
-    if (callCopyStatus) callCopyStatus.textContent = '';
+    if (callModalTitle) callModalTitle.textContent = showOfferMessage ? 'Ask about this offer' : 'Call us';
+    if (callModalMessage) {
+      callModalMessage.hidden = !showOfferMessage;
+      callModalMessage.textContent = showOfferMessage ? 'Contact the salon to confirm the current offer and price.' : '';
+    }
+    if (callBookButton) callBookButton.hidden = !showOfferMessage;
+    if (callOfferNote) callOfferNote.hidden = !showOfferMessage;
     document.body.style.overflow = 'hidden';
   }
 
@@ -219,89 +221,23 @@
     document.body.style.overflow = '';
   }
 
-  function setCopyStatus(message) {
-    if (callCopyStatus) callCopyStatus.textContent = message;
-  }
-
-  function fallbackCopyCallNumber() {
-    var input = document.createElement('textarea');
-    input.value = callNumber;
-    input.setAttribute('readonly', '');
-    input.style.position = 'fixed';
-    input.style.opacity = '0';
-    document.body.appendChild(input);
-    input.select();
-    try {
-      document.execCommand('copy');
-      setCopyStatus('Number copied');
-    } catch (error) {
-      setCopyStatus('Please copy the number above');
-    }
-    document.body.removeChild(input);
-  }
-
-  function copyCallNumber() {
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(callNumber).then(function () {
-        setCopyStatus('Number copied');
-      }, fallbackCopyCallNumber);
-      return;
-    }
-    fallbackCopyCallNumber();
-  }
-
   document.querySelectorAll('[data-hh-call]').forEach(function (btn) {
-    btn.addEventListener('click', openCall);
+    btn.addEventListener('click', function () { openCall(false); });
   });
   document.querySelectorAll('[data-hh-call-close]').forEach(function (btn) {
     btn.addEventListener('click', closeCall);
   });
-  if (callCopyButton) callCopyButton.addEventListener('click', copyCallNumber);
+  if (callBookButton) callBookButton.addEventListener('click', function () {
+    closeCall();
+    openBooking();
+  });
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
     closeBooking();
     closeCall();
   });
 
-  /* ---------- 优惠券弹层：点券 → 显示详情 + 邮箱表单 ---------- */
-  var couponModal = document.getElementById('couponModal');
-  var couponForm = document.getElementById('couponForm');
-  var couponSuccess = document.getElementById('couponSuccess');
-  function openCoupon(t) {
-    if (!couponModal) return;
-    document.getElementById('cvTag').textContent = t.dataset.tag || '';
-    document.getElementById('cvValue').textContent = ((t.dataset.value || '') + ' ' + (t.dataset.unit || '')).trim();
-    document.getElementById('cvTitle').textContent = t.dataset.title || '';
-    document.getElementById('cvTerms').textContent = t.dataset.terms || '';
-    document.getElementById('cvExpiry').textContent = t.dataset.expiry || '';
-    if (couponForm) { couponForm.hidden = false; couponForm.reset(); }
-    if (couponSuccess) couponSuccess.hidden = true;
-    couponModal.classList.add('open');
-    couponModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeCoupon() {
-    if (!couponModal) return;
-    couponModal.classList.remove('open');
-    couponModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
   document.querySelectorAll('[data-coupon]').forEach(function (t) {
-    t.addEventListener('click', function () { openCoupon(t); });
+    t.addEventListener('click', function () { openCall(true); });
   });
-  document.querySelectorAll('[data-coupon-close]').forEach(function (b) {
-    b.addEventListener('click', closeCoupon);
-  });
-  if (couponForm) {
-    couponForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = document.getElementById('couponEmail');
-      if (!email.value || email.value.indexOf('@') === -1) { email.focus(); return; }
-      /* TODO 接入真实服务：把 email + 当前券信息 POST 到 Tally/Formspree/Make，
-         由自动化生成唯一码、发邮件、写入 Airtable 台账。当前为前端演示，直接显示成功。 */
-      couponForm.hidden = true;
-      if (couponSuccess) couponSuccess.hidden = false;
-    });
-  }
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCoupon(); });
 })();

@@ -18,6 +18,7 @@
   --gold-hi:   #c8ad7e;   /* 拉丝金（hero / footer / 黑按钮上的金字） */
   --gold-deep: #6a531f;
   --maxw:      1080px;
+  --service-menu-height: 340px;
   --serif: "Playfair Display", Georgia, "Times New Roman", serif;
   --sans: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -149,14 +150,16 @@ a{ color:inherit; text-decoration:none; }
 .call-modal__content{ text-align:center; }
 .call-modal__eyebrow{ margin:0 0 12px; color:var(--gold-ink); font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
 .call-modal__title{ margin:0; font-family:var(--serif); font-size:30px; line-height:1.12; color:var(--ink); }
+.call-modal__message{ max-width:300px; margin:12px auto 0; color:var(--muted); font-size:14px; line-height:1.5; }
 .call-modal__number{ display:block; margin:22px 0 18px; color:var(--gold-ink); font:700 24px/1.2 var(--sans); letter-spacing:.04em; text-decoration:none; }
 .call-modal__number:hover{ color:var(--gold-deep); }
-.call-modal__copy{
-  min-height:44px; padding:0 20px; border:0; border-radius:999px; background:var(--ink); color:var(--gold-hi);
+.call-modal__book{
+  display:flex; width:100%; min-height:48px; padding:0 20px; border:1px solid var(--gold); border-radius:999px;
+  align-items:center; justify-content:center; background:var(--ink); color:var(--gold-hi);
   font:800 14px var(--sans); cursor:pointer;
 }
-.call-modal__copy:hover{ background:#000; }
-.call-modal__status{ min-height:18px; margin:10px 0 0; color:var(--muted); font-size:12px; }
+.call-modal__book:hover{ background:#000; color:#e6cd8c; }
+.call-modal__note{ margin:10px 0 0; color:var(--muted); font-size:11.5px; line-height:1.45; }
 
 /* ============================================================
    NAV
@@ -273,13 +276,6 @@ a{ color:inherit; text-decoration:none; }
 
 @media (max-width:819px){
   #services{ padding-bottom:0; }
-  #services .menu.menu--scroll{
-    max-height:none;
-    overflow:visible;
-    -webkit-mask-image:none;
-    mask-image:none;
-  }
-  #services .cat{ min-height:0; }
   .chips-row::before,
   .chips-row::after{
     content:""; position:absolute; top:0; bottom:0; width:28px; z-index:1;
@@ -304,10 +300,8 @@ a{ color:inherit; text-decoration:none; }
 .cat__title{ font-family:var(--serif); font-size:26px; font-weight:700; line-height:1.12; margin-bottom:6px; color:var(--ink); white-space:nowrap; }
 .cat .cat__title{ display:none; }
 .cat__note{ font-size:12.5px; color:var(--muted); margin-bottom:8px; }
-.menu{ list-style:none; }
-/* 仅当项目超出时才固定高度 + 内部滚动 + 底部渐隐；能正常显示的分类不做滚动容器，不拦截整页滑动 */
-.menu.menu--scroll{
-  max-height:340px; overflow-y:auto;
+.menu{
+  height:var(--service-menu-height); overflow-y:auto; list-style:none;
   -webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent 100%);
   mask-image:linear-gradient(to bottom,#000 80%,transparent 100%);
 }
@@ -362,61 +356,10 @@ a{ color:inherit; text-decoration:none; }
 }
 .ticket__tag{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-ink); font-weight:800; }
 .ticket__title{ font-family:var(--serif); font-size:19px; font-weight:600; color:var(--ink); }
+.ticket__expiry{ font-size:10px; line-height:1.2; color:var(--muted); }
 .ticket__cta{ font-size:13px; font-weight:700; color:var(--gold-ink); margin-top:2px; }
 .ticket:hover .ticket__body{ border-color:var(--gold); }
 .ticket:active{ transform:translateY(1px); }
-
-/* ---- 优惠券弹层 ---- */
-.coupon-modal{ position:fixed; inset:0; z-index:210; display:none; }
-.coupon-modal.open{ display:block; }
-.coupon-modal__backdrop{ position:absolute; inset:0; background:rgba(15,12,10,.6); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
-.coupon-modal__panel{
-  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  width:min(420px,92vw); max-height:92vh; overflow:auto;
-  background:#fff; border-radius:20px; padding:46px 22px 22px; box-shadow:0 24px 70px rgba(0,0,0,.45);
-}
-.coupon-modal__close{
-  position:absolute; right:16px; top:12px; width:34px; height:34px; border:none;
-  background:none; color:#171716; font-size:23px; font-weight:700; line-height:1; cursor:pointer; z-index:2;
-  display:flex; align-items:center; justify-content:center; opacity:.7; transition:opacity .2s;
-}
-.coupon-modal__close:hover{ opacity:1; }
-.coupon-ticket{ background:linear-gradient(160deg,#221c12,#171716); color:#fff; border-radius:16px; overflow:hidden; margin-top:2px; }
-.coupon-ticket__top{ padding:22px 22px 16px; text-align:center; }
-.coupon-ticket__tag{ display:inline-block; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#0f0d0b; background:var(--gold-hi); padding:4px 12px; border-radius:999px; font-weight:800; }
-.coupon-ticket__value{ display:block; font-family:var(--serif); font-size:44px; font-weight:700; color:var(--gold-hi); margin-top:14px; line-height:1; }
-.coupon-ticket__title{ display:block; font-size:15px; color:#e9e0cf; margin-top:8px; }
-.coupon-ticket__perf{ border-top:2px dashed rgba(255,255,255,.22); margin:0 16px; }
-.coupon-ticket__bottom{ padding:18px 22px 22px; display:flex; gap:16px; align-items:center; }
-.coupon-ticket__qr{ flex:0 0 84px; height:84px; background:#fff; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#c2c2c2; font-size:12px; letter-spacing:.2em; overflow:hidden; padding:0; }
-.coupon-ticket__qr-img{ width:100%; height:100%; object-fit:cover; display:block; filter:blur(4px); transform:scale(1.18); }
-.coupon-ticket__meta{ flex:1; min-width:0; }
-.coupon-ticket__terms{ font-size:11.5px; color:#c9bfb0; line-height:1.5; }
-.coupon-ticket__expiry{ font-size:11.5px; color:var(--gold-hi); margin-top:6px; font-weight:600; }
-.coupon-form{ margin-top:18px; }
-.coupon-form__label{ display:block; font-size:13.5px; font-weight:600; color:var(--ink); margin-bottom:10px; }
-.coupon-form__row{ display:flex; flex-direction:column; gap:10px; }
-.coupon-form__input{ width:100%; padding:12px 14px; border:1px solid var(--gray); border-radius:10px; font-size:15px; font-family:var(--sans); }
-.coupon-form__input:focus{ outline:none; border-color:var(--gold); }
-.coupon-form__btn{ width:100%; padding:13px; font-size:14px; }
-.coupon-form__note{ font-size:11.5px; color:var(--muted); margin-top:10px; text-align:center; }
-.coupon-success{ margin-top:20px; text-align:center; padding:6px 0 4px; }
-.coupon-success__icon{ width:52px; height:52px; margin:0 auto 12px; border-radius:50%; background:var(--gold-hi); color:#171716; font-size:26px; display:flex; align-items:center; justify-content:center; }
-.coupon-success__text{ font-size:14px; color:var(--ink); line-height:1.55; }
-
-/* ============================================================
-   SHOP
-   ============================================================ */
-.shop-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:26px; }
-.shop-card{ background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
-.shop-card__img{ aspect-ratio:1/1; background:#f0ebe1; position:relative; }
-.shop-card__img::after{
-  content:"IMG"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  color:#c4b9a8; font-size:12px; letter-spacing:.2em;
-}
-.shop-card__body{ padding:12px 14px; display:flex; flex-direction:column; gap:2px; }
-.shop-card__name{ font-size:14px; font-weight:700; color:var(--ink); }
-.shop-card__price{ font-size:13px; color:var(--gold-ink); }
 
 /* ============================================================
    ABOUT
@@ -474,8 +417,6 @@ a{ color:inherit; text-decoration:none; }
 
   .offer-grid{ grid-template-columns:repeat(3,1fr); }
   .ticket-grid{ grid-template-columns:repeat(3,1fr); }
-  .shop-grid{ grid-template-columns:repeat(4,1fr); }
-
   .about__inner{ grid-template-columns:1fr 1fr; gap:56px; }
   .contact__inner{ grid-template-columns:1fr 1fr; gap:64px; }
 
