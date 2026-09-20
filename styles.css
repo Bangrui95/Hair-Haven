@@ -224,7 +224,7 @@ a{ color:inherit; text-decoration:none; }
 .hero__media{ position:absolute; inset:0; background:#0c0a08; filter:blur(2px); transform:scale(1.03); }
 /* 手机端加载竖版裁切；电脑端在下方媒体查询换成横版 */
 .hero__media[data-img]{
-  background:#0c0a08 url("images/hero-mobile.jpg") center/cover no-repeat;
+  background:#0c0a08 url("images/hair-haven-hero-mobile.webp") center/cover no-repeat;
 }
 /* 黑色蒙层悬浮在图片上（保留黑底质感 + 透明度，确保文字可读） */
 .hero__overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(23,23,22,.62) 0%, rgba(23,23,22,.72) 45%, rgba(23,23,22,.85) 100%); }
@@ -276,6 +276,7 @@ a{ color:inherit; text-decoration:none; }
 
 @media (max-width:819px){
   #services{ padding-bottom:0; }
+  .salon-gallery__grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   .chips-row::before,
   .chips-row::after{
     content:""; position:absolute; top:0; bottom:0; width:28px; z-index:1;
@@ -292,6 +293,11 @@ a{ color:inherit; text-decoration:none; }
 .popular-services__title{
   font-family:var(--serif); font-size:26px; font-weight:700; line-height:1.12; margin-bottom:6px;
   color:var(--ink);
+}
+/* 热门项目全部直接展示，不使用固定高度、内部滚动或渐隐分页效果。 */
+.menu.popular-services__list{
+  height:auto; overflow:visible;
+  -webkit-mask-image:none; mask-image:none;
 }
 
 /* ---------- 服务菜单（分类切换：一次只显示一类） ---------- */
@@ -366,12 +372,29 @@ a{ color:inherit; text-decoration:none; }
    ============================================================ */
 .about{ background:var(--surface); padding:64px 0; }
 .about__inner{ display:grid; grid-template-columns:1fr; gap:28px; align-items:center; }
-.about__media{ aspect-ratio:4/3; border-radius:18px; position:relative;
-  background:radial-gradient(120% 90% at 30% 20%, #efe6d6 0%, #e6d8c2 60%, #dccaae 100%);
-  border:1px solid var(--line); }
-.about__media::after{ content:"IMG"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#bcaa8d; letter-spacing:.2em; font-size:12px; }
+.about__media{ aspect-ratio:4/3; overflow:hidden; border:1px solid var(--line); border-radius:18px; }
+.about__media img{ width:100%; height:100%; object-fit:cover; }
 .about__text p{ margin-top:14px; color:var(--muted); font-size:15px; }
 .about__text .btn{ margin-top:24px; }
+
+/* 门店环境图：紧随主图之后，和作品墙区分开来。 */
+.salon-gallery{ margin-top:42px; }
+.salon-gallery__grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:8px; }
+.salon-gallery__item{ margin:0; overflow:hidden; border-radius:8px; background:var(--surface-2); }
+.salon-gallery__item img{
+  width:100%; aspect-ratio:3 / 2; object-fit:cover; object-position:center;
+  pointer-events:none; -webkit-user-drag:none; user-select:none;
+}
+
+/* 作品墙：所有设备保持三列，仅作展示，不提供点击放大。 */
+.work-gallery{ margin-top:42px; }
+.work-gallery__intro{ margin-bottom:18px; }
+.work-gallery__grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+.work-gallery__item{ margin:0; overflow:hidden; border-radius:8px; background:var(--surface-2); }
+.work-gallery__item img{
+  width:100%; aspect-ratio:3 / 2; object-fit:cover; object-position:center;
+  pointer-events:none; -webkit-user-drag:none; user-select:none;
+}
 
 /* ============================================================
    CONTACT
@@ -407,7 +430,7 @@ a{ color:inherit; text-decoration:none; }
   .nav__right{ margin-left:26px; }
   .nav__toggle{ display:none; }
 
-  .hero__media[data-img]{ background-image:url("images/hero-desktop.jpg"); }
+  .hero__media[data-img]{ background-image:url("images/hair-haven-hero-desktop.webp"); }
   .hero__content{ transform:translateY(3vh); }
   .hero__title{ font-size:60px; }
   .hero__sub{ font-size:20px; }
@@ -418,6 +441,10 @@ a{ color:inherit; text-decoration:none; }
   .offer-grid{ grid-template-columns:repeat(3,1fr); }
   .ticket-grid{ grid-template-columns:repeat(3,1fr); }
   .about__inner{ grid-template-columns:1fr 1fr; gap:56px; }
+  .salon-gallery{ margin-top:56px; }
+  .salon-gallery__grid{ gap:12px; }
+  .work-gallery{ margin-top:56px; }
+  .work-gallery__grid{ gap:12px; }
   .contact__inner{ grid-template-columns:1fr 1fr; gap:64px; }
 
   .menu{ column-gap:48px; }
