@@ -7,7 +7,7 @@
   <meta name="description" content="Hair Haven — expert cuts, colour, barbering and nails in London (E14). Book your appointment online.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://www.sumupbookings.com" crossorigin>
+  <link rel="preconnect" href="https://widget.treatwell.co.uk" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=42">
 </head>
@@ -273,12 +273,30 @@
     </div>
   </footer>
 
-  <!-- ============ 预订浮层（自建：iframe 预加载，点击秒开、无转圈） ============ -->
-  <div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <!-- Booking -->
+  <div class="booking-modal" id="bookingModal" role="dialog" aria-modal="true" aria-label="Book an appointment" aria-hidden="true">
     <div class="booking-modal__backdrop" data-hh-close></div>
     <div class="booking-modal__panel">
       <button class="booking-modal__close" data-hh-close aria-label="Close">✕</button>
-      <div class="booking-modal__frame" id="bookingFrame"></div>
+      <div class="booking-modal__frame">
+        <iframe
+          id="treatwellBookingFrame"
+          src="https://widget.treatwell.co.uk/place/516503/menu/"
+          data-booking-url="https://widget.treatwell.co.uk/place/516503/menu/"
+          title="Book with Hair Haven on Treatwell"
+          referrerpolicy="strict-origin-when-cross-origin"
+          aria-busy="true"
+        ></iframe>
+      </div>
+      <section class="booking-fallback" id="bookingFallback" aria-labelledby="bookingFallbackTitle" hidden>
+        <p class="booking-fallback__eyebrow">Hair Haven Booking</p>
+        <h2 class="booking-fallback__title" id="bookingFallbackTitle">Booking is taking a little longer</h2>
+        <p class="booking-fallback__text">Continue securely on Treatwell to choose your service and appointment time.</p>
+        <a class="booking-fallback__primary" href="https://widget.treatwell.co.uk/place/516503/menu/" target="_blank" rel="noopener noreferrer">
+          Continue with Treatwell <span aria-hidden="true">↗</span>
+        </a>
+        <button class="booking-fallback__retry" id="bookingRetry" type="button">Try again</button>
+      </section>
     </div>
   </div>
 

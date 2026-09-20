@@ -97,7 +97,7 @@ a{ color:inherit; text-decoration:none; }
 .btn--lg{ padding:16px 34px; font-size:15px; }
 
 /* ============================================================
-   预订浮层（自建，iframe 预加载）
+   预订浮层（Treatwell 官方预约页优先，保底页仅在失败时出现）
    ============================================================ */
 .booking-modal{ position:fixed; inset:0; z-index:200; display:none; }
 .booking-modal.open{ display:block; }
@@ -115,8 +115,32 @@ a{ color:inherit; text-decoration:none; }
   display:flex; align-items:center; justify-content:center;
 }
 .booking-modal__close:hover{ background:rgba(0,0,0,.12); }
-.booking-modal__frame{ flex:1; min-height:0; }
+.booking-modal__frame{ flex:1; min-height:0; height:100%; }
 .booking-modal__frame iframe{ width:100%; height:100%; border:none; display:block; }
+.booking-modal--fallback .booking-modal__frame{ visibility:hidden; }
+.booking-fallback{
+  position:absolute; inset:0; z-index:3; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; padding:48px 34px; background:#fff;
+  color:var(--ink); text-align:center;
+}
+.booking-fallback[hidden]{ display:none; }
+.booking-fallback__eyebrow{
+  margin:0 0 14px; color:var(--gold); font-size:11px; font-weight:800;
+  letter-spacing:.18em; text-transform:uppercase;
+}
+.booking-fallback__title{ margin:0; font-family:var(--serif); font-size:30px; line-height:1.12; }
+.booking-fallback__text{ max-width:300px; margin:16px 0 26px; color:var(--muted); font-size:15px; line-height:1.55; }
+.booking-fallback__primary{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:48px;
+  padding:0 22px; border-radius:999px; background:var(--ink); color:#fff;
+  font-size:14px; font-weight:800; text-decoration:none;
+}
+.booking-fallback__primary:hover{ background:#000; color:var(--gold); }
+.booking-fallback__retry{
+  margin-top:14px; padding:7px 10px; border:0; background:transparent; color:var(--muted);
+  font:inherit; font-size:13px; font-weight:700; text-decoration:underline; cursor:pointer;
+}
+.booking-fallback__retry:hover{ color:var(--ink); }
 
 /* ============================================================
    NAV

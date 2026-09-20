@@ -4,8 +4,6 @@
 (function () {
   'use strict';
 
-  var BOOKING_URL = 'https://www.sumupbookings.com/haven-hair';
-
   /* ---------- 移动端菜单 ---------- */
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
@@ -90,40 +88,90 @@
     if (arrowR) arrowR.addEventListener('click', function () { scrollChips(1); });
   }
 
-  /* ---------- 预订：预加载 SumUp iframe，点击秒开（无转圈） ----------
-     页面加载完成后延迟预热预订 iframe 并常驻；点击任意 data-hh-book
-     按钮时直接显示已加载好的浮层，关闭时保留 iframe，下次开也是秒开。
-     若浮层结构缺失则回退到新标签打开预订页。 */
-  var BOOKING_EMBED = 'https://www.sumupbookings.com/haven-hair/embed?utm_source=widget';
+  /* ---------- Booking ---------- */
   var bookingModal = document.getElementById('bookingModal');
-  var bookingFrameHost = document.getElementById('bookingFrame');
-  var bookingIframe = null;
+  var bookingIframe = document.getElementById('treatwellBookingFrame');
+  var bookingFallback = document.getElementById('bookingFallback');
+  var bookingRetry = document.getElementById('bookingRetry');
+  var bookingTimer = null;
+  var bookingStatus = bookingIframe ? 'loading' : 'failed';
+  var bookingTimeout = 3000;
 
-  function preloadBooking() {
-    if (bookingIframe || !bookingFrameHost) return;
-    bookingIframe = document.createElement('iframe');
-    bookingIframe.src = BOOKING_EMBED;
-    bookingIframe.title = 'Book an appointment';
-    bookingIframe.setAttribute('allow', 'payment; clipboard-write');
-    bookingFrameHost.appendChild(bookingIframe);
+  function clearBookingTimer() {
+    if (bookingTimer) window.clearTimeout(bookingTimer);
+    bookingTimer = null;
   }
+
+  function setBookingFallback(visible) {
+    if (!bookingModal || !bookingFallback) return;
+    bookingFallback.hidden = !visible;
+    bookingModal.classList.toggle('booking-modal--fallback', visible);
+  }
+
+  function showBookingFallback() {
+    if (!bookingModal || !bookingModal.classList.contains('open')) return;
+    clearBookingTimer();
+    setBookingFallback(true);
+  }
+
+  function waitForBooking() {
+    clearBookingTimer();
+    if (bookingStatus === 'loaded') return;
+    bookingTimer = window.setTimeout(function () {
+      if (bookingStatus !== 'loaded') showBookingFallback();
+    }, bookingTimeout);
+  }
+
+  function bookingLoaded() {
+    bookingStatus = 'loaded';
+    bookingIframe.setAttribute('aria-busy', 'false');
+    clearBookingTimer();
+    setBookingFallback(false);
+  }
+
+  function reloadBooking() {
+    var bookingUrl = bookingIframe && bookingIframe.dataset.bookingUrl;
+    if (!bookingUrl) {
+      bookingStatus = 'failed';
+      showBookingFallback();
+      return;
+    }
+
+    bookingStatus = 'loading';
+    bookingIframe.setAttribute('aria-busy', 'true');
+    setBookingFallback(false);
+    bookingIframe.src = bookingUrl;
+    waitForBooking();
+  }
+
+  if (bookingIframe) {
+    bookingIframe.addEventListener('load', bookingLoaded);
+    bookingIframe.addEventListener('error', function () {
+      bookingStatus = 'failed';
+      showBookingFallback();
+    });
+  }
+
+  if (bookingRetry) bookingRetry.addEventListener('click', reloadBooking);
+
   function openBooking() {
-    if (!bookingModal) { window.open(BOOKING_URL, '_blank', 'noopener'); return; }
-    preloadBooking();                       // 幂等：确保已加载
+    if (!bookingModal) return;
     bookingModal.classList.add('open');
     bookingModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    setBookingFallback(false);
+    if (bookingStatus === 'failed') showBookingFallback();
+    else waitForBooking();
   }
+
   function closeBooking() {
     if (!bookingModal) return;
     bookingModal.classList.remove('open');
     bookingModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    clearBookingTimer();
+    setBookingFallback(false);
   }
-  // 页面加载完成后延迟预热（不与首屏关键内容抢带宽）
-  if (document.readyState === 'complete') setTimeout(preloadBooking, 1200);
-  else window.addEventListener('load', function () { setTimeout(preloadBooking, 1200); });
-
   document.querySelectorAll('[data-hh-book]').forEach(function (btn) {
     btn.addEventListener('click', openBooking);
   });
