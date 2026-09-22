@@ -1,21 +1,17 @@
-/* ============================================================
-   Hair Haven — 官网样式（白底 · 黑金配色 · 手机端优先）
-   背景：白；文字：近黑；点缀：金；按钮：黑
-   字体：大标题 Playfair Display（衬线），正文 Nunito Sans
-   ============================================================ */
+
 
 :root{
-  /* 高级黑金配色 —— 拉丝金 #C8AD7E · 拉丝黑 #171716 · 浅钛灰 #BFBEBF */
-  --bg:        #ffffff;   /* 白色主背景（贴合 SumUp 白色浮层） */
-  --surface:   #f4f3f1;   /* 浅中性色带（交替板块 / 卡片背景） */
+  
+  --bg:        #ffffff;   
+  --surface:   #f4f3f1;   
   --surface-2: #eae8e4;
-  --ink:       #171716;   /* 拉丝黑（正文 / 大标题 / 按钮 / 页脚） */
-  --muted:     #847f79;   /* 次文字（灰） */
-  --line:      #e0dedb;   /* 浅色分隔线 */
-  --gray:      #bfbebf;   /* 浅钛灰（pill 描边等点缀） */
-  --gold:      #c8ad7e;   /* 拉丝金（描边 / hover / 深色区域文字） */
-  --gold-ink:  #8f7336;   /* 深金：白底上的金色文字（保证可读） */
-  --gold-hi:   #c8ad7e;   /* 拉丝金（hero / footer / 黑按钮上的金字） */
+  --ink:       #171716;   
+  --muted:     #847f79;   
+  --line:      #e0dedb;   
+  --gray:      #bfbebf;   
+  --gold:      #c8ad7e;   
+  --gold-ink:  #8f7336;   
+  --gold-hi:   #c8ad7e;   
   --gold-deep: #6a531f;
   --maxw:      1080px;
   --service-menu-height: 340px;
@@ -25,7 +21,7 @@
 
 *{ box-sizing:border-box; margin:0; padding:0; }
 html{ scroll-behavior:smooth; scroll-padding-top:70px; scrollbar-width:none; -ms-overflow-style:none; }
-/* 全局隐藏滚动条（滚动功能保留） */
+
 *{ scrollbar-width:none; -ms-overflow-style:none; }
 *::-webkit-scrollbar{ width:0; height:0; display:none; }
 body{
@@ -40,7 +36,6 @@ a{ color:inherit; text-decoration:none; }
 
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 20px; }
 
-/* ---------- 通用文字 ---------- */
 .eyebrow{
   font-size:12px; letter-spacing:.24em; text-transform:uppercase;
   color:var(--gold-ink); font-weight:700; margin-bottom:10px;
@@ -53,13 +48,12 @@ a{ color:inherit; text-decoration:none; }
 .section__title--light{ color:var(--ink); }
 .section__lead{ color:var(--muted); margin-top:14px; max-width:640px; font-size:15px; }
 .section__lead strong{ color:var(--gold-ink); font-weight:700; }
-/* 头发长度图例：紧跟在当前分类标题下方 */
+
 .lead-sizes{ margin:2px 0 14px; font-size:13px; color:var(--muted); letter-spacing:.01em; }
 .lead-sizes strong{ color:var(--gold-ink); font-weight:800; }
-/* 图例后面紧跟 W/B 说明时（Colour Packages），把两行详情之间的 gap 收紧 */
+
 .lead-sizes:has(+ .cat__note){ margin-bottom:4px; }
 
-/* ---------- 按钮 ---------- */
 .btn{
   font-family:var(--sans); font-size:14px; font-weight:800; letter-spacing:.02em;
   border:none; border-radius:999px; padding:13px 24px; cursor:pointer;
@@ -68,30 +62,26 @@ a{ color:inherit; text-decoration:none; }
   white-space:nowrap; -webkit-user-select:none; user-select:none;
 }
 .btn:active{ transform:translateY(1px); }
-/* 主 CTA：黑底 + 金字（呼应黑金价目表） */
+
 .btn--gold{
   background:#171716; color:var(--gold-hi);
   border:1px solid var(--gold);
   box-shadow:0 8px 24px rgba(0,0,0,.35);
 }
 .btn--gold:hover{ background:#000; color:#e6cd8c; }
-/* 无描边变体（服务区顶部预订按钮用） */
+
 .btn--noglow{ border:none; box-shadow:0 8px 22px rgba(0,0,0,.3); }
 .btn--noglow:hover{ box-shadow:0 8px 22px rgba(0,0,0,.3); }
-/* 描边（次要） */
+
 .btn--dark{ background:transparent; color:var(--ink); border:1px solid var(--ink); }
 .btn--dark:hover{ background:var(--ink); color:var(--gold-hi); }
-/* 导航预订按钮：黑底金字 */
-/* 导航预订按钮：首屏（hero 上）= 金色描边；滚动后 = 黑底金字 */
+
 .btn--book{ background:transparent; color:var(--gold-hi); border:1px solid var(--gold); padding:10px 20px; font-size:13px; }
 .btn--book:hover{ background:var(--gold); color:#211602; }
 .nav--scrolled .btn--book{ background:var(--ink); color:var(--gold-hi); border-color:var(--ink); }
 .nav--scrolled .btn--book:hover{ background:#000; color:#e6cd8c; }
 .btn--lg{ padding:16px 34px; font-size:15px; }
 
-/* ============================================================
-   预订浮层（Treatwell 官方预约页优先，保底页仅在失败时出现）
-   ============================================================ */
 .booking-modal,.call-modal{ position:fixed; inset:0; z-index:200; display:none; }
 .booking-modal.open,.call-modal.open{ display:block; }
 .booking-modal__backdrop,.call-modal__backdrop{ position:absolute; inset:0; background:rgba(15,12,10,.55); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
@@ -153,16 +143,13 @@ a{ color:inherit; text-decoration:none; }
 .call-modal__book:hover{ background:#000; color:#e6cd8c; }
 .call-modal__note{ margin:10px 0 0; color:var(--muted); font-size:11.5px; line-height:1.45; }
 
-/* ============================================================
-   NAV
-   ============================================================ */
 .nav{
   position:fixed; top:0; left:0; right:0; z-index:50;
   background:transparent;
   border-bottom:1px solid transparent;
   transition:background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
 }
-/* 滚过 hero 后：切换成白色导航栏 */
+
 .nav--scrolled{
   background:rgba(255,255,255,.9); backdrop-filter:saturate(180%) blur(12px);
   border-bottom-color:var(--line);
@@ -189,36 +176,32 @@ a{ color:inherit; text-decoration:none; }
 .nav--scrolled .nav__toggle{ background:#fff; border-color:var(--line); }
 .nav--scrolled .nav__toggle span{ background:var(--ink); }
 
-/* 移动端展开菜单 */
 .nav__links.open{
   display:flex; flex-direction:column; gap:2px;
   position:absolute; left:0; right:0; top:100%;
   padding:8px 20px 16px;
   transition:background .3s ease, border-color .3s ease;
 }
-/* 顶部（hero 上）：黑色下拉，跟透明黑金导航同步 */
+
 .nav__links.open{ background:rgba(16,13,11,.97); backdrop-filter:blur(8px); border-bottom:1px solid rgba(230,205,140,.18); }
 .nav__links.open a{
   padding:12px 6px; font-size:15px; font-weight:600; color:#f2ead9;
   border-bottom:1px solid rgba(255,255,255,.08);
 }
 .nav__links.open a:last-child{ border-bottom:none; }
-/* 滚动后：白色下拉，跟白色导航同步 */
+
 .nav--scrolled .nav__links.open{ background:rgba(255,255,255,.97); border-bottom-color:var(--line); }
 .nav--scrolled .nav__links.open a{ color:var(--ink); border-bottom-color:var(--line); }
-/* 顶部态菜单打开时：导航栏也变黑，与下拉融为一整块 */
+
 .nav:not(.nav--scrolled):has(.nav__links.open){ background:rgba(16,13,11,.97); backdrop-filter:blur(8px); }
 
-/* ============================================================
-   HERO（深色图片区，白字金饰——真实照片放进来时天然有对比）
-   ============================================================ */
 .hero{ position:relative; min-height:100vh; min-height:100svh; display:flex; align-items:center; overflow:hidden; padding-top:16vh; }
 .hero__media{ position:absolute; inset:0; background:#0c0a08; filter:blur(2px); transform:scale(1.03); }
-/* 手机端加载竖版裁切；电脑端在下方媒体查询换成横版 */
+
 .hero__media[data-img]{
   background:#0c0a08 url("images/hair-haven-hero-mobile.webp") center/cover no-repeat;
 }
-/* 黑色蒙层悬浮在图片上（保留黑底质感 + 透明度，确保文字可读） */
+
 .hero__overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(23,23,22,.62) 0%, rgba(23,23,22,.72) 45%, rgba(23,23,22,.85) 100%); }
 .hero__content{ position:relative; z-index:2; padding:40px 24px; max-width:720px; margin:0 auto; text-align:center; color:#fff; transform:translateY(5vh); }
 .hero__eyebrow{ font-size:14px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold-hi); margin-bottom:18px; font-weight:800; line-height:1.9; }
@@ -226,9 +209,6 @@ a{ color:inherit; text-decoration:none; }
 .hero__sub{ margin:20px auto 30px; font-size:18px; font-weight:500; line-height:1.5; color:#f0e9de; max-width:460px; }
 .hero__note{ margin-top:18px; font-size:14px; font-weight:600; color:#ddd3c4; letter-spacing:.03em; }
 
-/* ============================================================
-   SECTION 通用
-   ============================================================ */
 .section{ padding:64px 0; }
 .section#services{ padding-bottom:0; }
 .section__cta{ margin-top:24px; text-align:center; }
@@ -242,14 +222,13 @@ a{ color:inherit; text-decoration:none; }
 .booking-text-link:hover{ color:var(--gold-deep); }
 .booking-text-link:hover span{ transform:translateX(4px); }
 .booking-text-link--call{ display:block; margin:0 0 8px; }
-/* 服务区底部小字：居中、紧贴按钮下方、行距收紧 */
+
 .fineprint--center{ text-align:center; max-width:460px; margin:4px auto 0; line-height:1.35; }
-/* 服务区顶部预订入口：按钮 + 紧贴其下的小字 */
+
 .cta-block{ text-align:left; margin:24px 0 8px; }
 .cta-note{ font-size:12.5px; color:var(--muted); line-height:1.5; max-width:440px; margin:10px 0 0; }
 .fineprint{ margin-top:26px; font-size:12.5px; color:var(--muted); }
 
-/* ---------- 分类选项卡 ---------- */
 .cat__title.cat__title--control{ margin:30px 0 18px; }
 .chips-wrap{ display:grid; gap:8px; margin:0 0 2px; }
 .chips-row{ position:relative; min-width:0; }
@@ -280,19 +259,17 @@ a{ color:inherit; text-decoration:none; }
   .chips-row--has-right::after{ opacity:1; }
 }
 
-/* ---------- 热门服务 ---------- */
 .popular-services{ margin-top:22px; }
 .popular-services__title{
   font-family:var(--serif); font-size:26px; font-weight:700; line-height:1.12; margin-bottom:6px;
   color:var(--ink);
 }
-/* 热门项目全部直接展示，不使用固定高度、内部滚动或渐隐分页效果。 */
+
 .menu.popular-services__list{
   height:auto; overflow:visible;
   -webkit-mask-image:none; mask-image:none;
 }
 
-/* ---------- 服务菜单（分类切换：一次只显示一类） ---------- */
 .cat{ display:none; padding-top:20px; scroll-margin-top:80px; min-height:0; }
 .cat.active{ display:block; }
 .cat__title{ font-family:var(--serif); font-size:26px; font-weight:700; line-height:1.12; margin-bottom:6px; color:var(--ink); white-space:nowrap; }
@@ -316,9 +293,6 @@ a{ color:inherit; text-decoration:none; }
 .item--bookable:hover .item__name{ color:var(--gold-ink); }
 .item--bookable:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; border-radius:4px; }
 
-/* ============================================================
-   OFFERS（暖白色带，与白色主背景区分）
-   ============================================================ */
 .offers{ background:var(--surface); color:var(--ink); padding:64px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
 .offer-grid{ display:grid; grid-template-columns:1fr; gap:16px; margin-top:28px; }
 .offer-card{
@@ -334,7 +308,6 @@ a{ color:inherit; text-decoration:none; }
 .offer-card p{ font-size:14px; color:var(--muted); }
 .offers__note{ margin-top:22px; font-size:12px; color:#a89d8e; }
 
-/* ---- 优惠券票根卡（Offers） ---- */
 .ticket-grid{ display:grid; grid-template-columns:1fr; gap:14px; margin-top:26px; }
 .ticket{
   display:flex; align-items:stretch; width:100%; text-align:left; cursor:pointer;
@@ -359,9 +332,6 @@ a{ color:inherit; text-decoration:none; }
 .ticket:hover .ticket__body{ border-color:var(--gold); }
 .ticket:active{ transform:translateY(1px); }
 
-/* ============================================================
-   ABOUT
-   ============================================================ */
 .about{ background:var(--surface); padding:64px 0; }
 .about__inner{ display:grid; grid-template-columns:1fr; gap:28px; align-items:center; }
 .about__media{ aspect-ratio:4/3; overflow:hidden; border:1px solid var(--line); border-radius:18px; }
@@ -369,7 +339,6 @@ a{ color:inherit; text-decoration:none; }
 .about__text p{ margin-top:14px; color:var(--muted); font-size:15px; }
 .about__text .btn{ margin-top:24px; }
 
-/* 门店环境图：紧随主图之后，和作品墙区分开来。 */
 .salon-gallery{ margin-top:42px; }
 .salon-gallery__grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:8px; }
 .salon-gallery__item{ margin:0; overflow:hidden; border-radius:8px; background:var(--surface-2); }
@@ -378,7 +347,6 @@ a{ color:inherit; text-decoration:none; }
   pointer-events:none; -webkit-user-drag:none; user-select:none;
 }
 
-/* 作品墙：所有设备保持三列，仅作展示，不提供点击放大。 */
 .work-gallery{ margin-top:42px; }
 .work-gallery__intro{ margin-bottom:18px; }
 .work-gallery__grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
@@ -388,9 +356,6 @@ a{ color:inherit; text-decoration:none; }
   pointer-events:none; -webkit-user-drag:none; user-select:none;
 }
 
-/* ============================================================
-   CONTACT
-   ============================================================ */
 .contact__inner{ display:grid; grid-template-columns:1fr; gap:40px; }
 .contact__address{ font-style:normal; font-size:16px; line-height:1.8; margin-top:16px; color:var(--ink); }
 .contact__maplink{ display:inline-block; margin-top:14px; color:var(--gold-ink); font-weight:700; font-size:14px; }
@@ -401,18 +366,12 @@ a{ color:inherit; text-decoration:none; }
 .hours li span:last-child{ color:var(--muted); }
 .contact__book{ display:flex; width:fit-content; margin-left:auto; margin-right:auto; }
 
-/* ============================================================
-   FOOTER（黑底金字，收束整站，重申黑金）
-   ============================================================ */
 .footer{ background:var(--ink); color:#b8ac9a; padding:34px 0; }
 .footer__inner{ display:flex; flex-direction:column; gap:8px; align-items:center; text-align:center; }
 .footer__brand{ font-family:var(--serif); color:var(--gold-hi); font-size:21px; font-weight:600; }
 .footer__meta{ font-size:13px; }
 .footer__copy{ font-size:12px; color:#8a7f70; }
 
-/* ============================================================
-   桌面端适配
-   ============================================================ */
 @media (min-width:820px){
   .nav__links{ display:flex; gap:26px; margin-left:auto; }
   .nav__links a{ font-size:14px; font-weight:600; color:#efe7d9; transition:color .3s ease; }

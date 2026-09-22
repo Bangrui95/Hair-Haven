@@ -1,10 +1,8 @@
-/* ============================================================
-   Hair Haven — 交互脚本
-   ============================================================ */
+
 (function () {
   'use strict';
 
-  /* ---------- 移动端菜单 ---------- */
+  
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
   if (toggle && links) {
@@ -15,7 +13,6 @@
     links.addEventListener('click', function (e) {
       if (e.target.tagName === 'A') links.classList.remove('open');
     });
-    // 点击菜单/按钮以外任意位置 → 自动关闭
     document.addEventListener('click', function (e) {
       if (!links.classList.contains('open')) return;
       if (links.contains(e.target) || toggle.contains(e.target)) return;
@@ -23,20 +20,19 @@
     });
   }
 
-  /* ---------- 导航栏双态：hero 上=透明黑金，滚过后=白色 ---------- */
+  
   var nav = document.querySelector('.nav');
   var hero = document.querySelector('.hero');
   function updateNav() {
     if (!nav) return;
-    // 一旦离开最顶部（位移 >4px）就切成白色；回到顶部恢复透明
     nav.classList.toggle('nav--scrolled', window.scrollY > 4);
-    if (links && links.classList.contains('open')) links.classList.remove('open');  // 滚动时收起菜单
+    if (links && links.classList.contains('open')) links.classList.remove('open');
   }
   window.addEventListener('scroll', updateNav, { passive: true });
   window.addEventListener('resize', updateNav);
   updateNav();
 
-  /* ---------- 服务分类切换：一次只显示一类 ---------- */
+  
   var chips = document.querySelectorAll('.chip[data-cat]');
   var cats = document.querySelectorAll('.cat');
   var activeCategoryTitle = document.getElementById('activeCategoryTitle');
@@ -57,7 +53,6 @@
       activeCategoryTitle.textContent = categoryTitle.textContent.trim();
       fitCategoryTitle();
     }
-    // 所有分类共用固定服务列表高度；内容超出时在列表内滚动。
     var menu = document.querySelector('#' + id + ' .menu');
     if (menu) {
       menu.scrollTop = 0;
@@ -67,7 +62,7 @@
     chips.forEach(function (c) {
       c.addEventListener('click', function () { activateCat(c.dataset.cat); });
     });
-    activateCat(chips[0].dataset.cat);   // 默认显示第一类（Haircuts）
+    activateCat(chips[0].dataset.cat);
   }
 
   function updateChipScrollState(row) {
@@ -90,7 +85,7 @@
   });
   window.addEventListener('load', fitCategoryTitle);
 
-  /* ---------- Booking ---------- */
+  
   var bookingModal = document.getElementById('bookingModal');
   var bookingIframe = document.getElementById('treatwellBookingFrame');
   var bookingFallback = document.getElementById('bookingFallback');
